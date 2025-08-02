@@ -14,16 +14,17 @@ async function cargarGraficoDesdeJSON(nombreArchivo, canvasId, titulo = "") {
   const opciones = structuredClone(baseOptions);
   if (titulo) opciones.plugins.title.text = titulo;
 
-  // Activar el plugin de etiquetas con cálculo real de porcentaje
+  // Activar el plugin de etiquetas
   opciones.plugins.datalabels = {
     color: '#fff',
     anchor: 'end',
     align: 'top',
     formatter: function (value, context) {
-      const data = context.chart.data.datasets[0].data;
-      const total = data.reduce((a, b) => a + b, 0);
-      const porcentaje = ((value / total) * 100).toFixed(1);
-      return `${porcentaje}%`;
+      // Detecta si es porcentaje, sino devuelve valor bruto
+      if (typeof value === 'number') {
+        return value + '%';
+      }
+      return value;
     },
     font: {
       weight: 'bold'
