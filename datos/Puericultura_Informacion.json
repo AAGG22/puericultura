@@ -1,0 +1,40 @@
+{
+  "type": "bar",
+  "data": {
+    "labels": ["Lavado de Manos (TL)", "Signos de Alarma (SS)", "Alertas (ALAS)", "Otros Temas"],
+    "datasets": [{
+      "label": "Binomios Capacitados",
+      "data": [1901, 1901, 1654, 1901],
+      "backgroundColor": ["#36A2EB", "#FF6384", "#4BC0C0", "#FFCE56"],
+      "borderColor": ["#2E8BC0", "#D81B60", "#3AA8A8", "#E0B44B"],
+      "borderWidth": 1
+    }]
+  },
+  "options": {
+    "scales": {
+      "y": {
+        "beginAtZero": true,
+        "title": {
+          "display": true,
+          "text": "Cantidad de Binomios"
+        }
+      },
+      "x": {
+        "title": {
+          "display": true,
+          "text": "Tema de Capacitación"
+        }
+      }
+    },
+    "plugins": {
+      "legend": {
+        "display": true,
+        "position": "top"
+      },
+      "title": {
+        "display": true,
+        "text": "Binomios Capacitados por Tema de Puericultura"
+      }
+    }
+  }
+}

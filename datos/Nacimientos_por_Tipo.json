@@ -1,0 +1,40 @@
+{
+  "type": "bar",
+  "data": {
+    "labels": ["Parto", "Cesárea"],
+    "datasets": [{
+      "label": "Cantidad de Nacimientos",
+      "data": [1050, 846],
+      "backgroundColor": ["#36A2EB", "#FF6384"],
+      "borderColor": ["#2E8BC0", "#D81B60"],
+      "borderWidth": 1
+    }]
+  },
+  "options": {
+    "scales": {
+      "y": {
+        "beginAtZero": true,
+        "title": {
+          "display": true,
+          "text": "Cantidad de Nacimientos"
+        }
+      },
+      "x": {
+        "title": {
+          "display": true,
+          "text": "Tipo de Nacimiento"
+        }
+      }
+    },
+    "plugins": {
+      "legend": {
+        "display": true,
+        "position": "top"
+      },
+      "title": {
+        "display": true,
+        "text": "Nacimientos por Tipo (Parto vs. Cesárea)"
+      }
+    }
+  }
+}

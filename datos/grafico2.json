@@ -1,0 +1,13 @@
+{
+  "type": "bar",
+  "data": {
+    "labels": ["Enero", "Febrero", "Marzo", "Abril", "Mayo"],
+    "datasets": [{
+      "label": "Ventas",
+      "data": [120, 190, 300, 250, 100],
+      "backgroundColor": ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"],
+      "borderColor": ["#D81B60", "#2E8BC0", "#E0B44B", "#3AA8A8", "#7E57C2"],
+      "borderWidth": 1
+    }]
+  }
+}

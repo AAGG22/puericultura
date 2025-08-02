@@ -1,0 +1,40 @@
+{
+  "type": "bar",
+  "data": {
+    "labels": ["San Luis", "Juana Koslay", "Villa de Merlo", "Quines", "Otras"],
+    "datasets": [{
+      "label": "Cantidad de Pacientes",
+      "data": [1560, 85, 50, 30, 176],
+      "backgroundColor": ["#36A2EB", "#FF6384", "#4BC0C0", "#FFCE56", "#E7E9ED"],
+      "borderColor": ["#2E8BC0", "#D81B60", "#3AA8A8", "#E0B44B", "#C7C9CB"],
+      "borderWidth": 1
+    }]
+  },
+  "options": {
+    "scales": {
+      "y": {
+        "beginAtZero": true,
+        "title": {
+          "display": true,
+          "text": "Cantidad de Pacientes"
+        }
+      },
+      "x": {
+        "title": {
+          "display": true,
+          "text": "Localidad"
+        }
+      }
+    },
+    "plugins": {
+      "legend": {
+        "display": true,
+        "position": "top"
+      },
+      "title": {
+        "display": true,
+        "text": "Cantidad de Pacientes por Localidad"
+      }
+    }
+  }
+}

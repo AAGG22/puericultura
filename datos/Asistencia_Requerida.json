@@ -1,0 +1,40 @@
+{
+  "type": "bar",
+  "data": {
+    "labels": ["Requiere Asistencia", "No Requiere Asistencia"],
+    "datasets": [{
+      "label": "Cantidad de Pacientes",
+      "data": [1010, 891],
+      "backgroundColor": ["#36A2EB", "#FF6384"],
+      "borderColor": ["#2E8BC0", "#D81B60"],
+      "borderWidth": 1
+    }]
+  },
+  "options": {
+    "scales": {
+      "y": {
+        "beginAtZero": true,
+        "title": {
+          "display": true,
+          "text": "Cantidad de Pacientes"
+        }
+      },
+      "x": {
+        "title": {
+          "display": true,
+          "text": "Asistencia Requerida"
+        }
+      }
+    },
+    "plugins": {
+      "legend": {
+        "display": true,
+        "position": "top"
+      },
+      "title": {
+        "display": true,
+        "text": "Pacientes con Asistencia Requerida"
+      }
+    }
+  }
+}

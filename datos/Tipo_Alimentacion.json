@@ -1,0 +1,40 @@
+{
+  "type": "bar",
+  "data": {
+    "labels": ["Pecho Exclusivo", "Lactancia Mixta"],
+    "datasets": [{
+      "label": "Cantidad de Bebés",
+      "data": [1644, 252],
+      "backgroundColor": ["#36A2EB", "#FF6384"],
+      "borderColor": ["#2E8BC0", "#D81B60"],
+      "borderWidth": 1
+    }]
+  },
+  "options": {
+    "scales": {
+      "y": {
+        "beginAtZero": true,
+        "title": {
+          "display": true,
+          "text": "Cantidad de Bebés"
+        }
+      },
+      "x": {
+        "title": {
+          "display": true,
+          "text": "Tipo de Alimentación"
+        }
+      }
+    },
+    "plugins": {
+      "legend": {
+        "display": true,
+        "position": "top"
+      },
+      "title": {
+        "display": true,
+        "text": "Tipo de Alimentación (Pecho Exclusivo vs. Lactancia Mixta)"
+      }
+    }
+  }
+}
