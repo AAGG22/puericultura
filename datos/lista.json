@@ -1,10 +1,10 @@
 [
+  { "archivo": "Pacientes_por_Localidad.json", "titulo": "Cantidad de Pacientes por Localidad" },
   { "archivo": "Asistencia_Requerida.json", "titulo": "Asistencia Requerida por Pacientes" },
   { "archivo": "Asistencia_y_Alimentacion.json", "titulo": "Relación entre Asistencia y Tipo de Alimentación" },
   { "archivo": "Edad_Gestacional.json", "titulo": "Distribución por Edad Gestacional" },
   { "archivo": "Lactancia_Mixta_por_Edad_Gestacional.json", "titulo": "Lactancia Mixta según Edad Gestacional" },
   { "archivo": "Nacimientos_por_Tipo.json", "titulo": "Tipos de Nacimiento" },
-  { "archivo": "Pacientes_por_Localidad.json", "titulo": "Cantidad de Pacientes por Localidad" },
   { "archivo": "Puericultura_Informacion.json", "titulo": "Información sobre Puericultura" },
   { "archivo": "Reingresos_por_Localidad.json", "titulo": "Reingresos Hospitalarios por Localidad" },
   { "archivo": "Tipo_Alimentacion.json", "titulo": "Distribución por Tipo de Alimentación" }
