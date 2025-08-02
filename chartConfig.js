@@ -14,6 +14,20 @@ export const baseOptions = {
       text: "",
       color: "#aaaaaa",
       font: { size: 24 }
+    },
+    datalabels: {
+      color: "#ffffff",
+      anchor: "end",
+      align: "top",
+      formatter: function (value, context) {
+        const data = context.chart.data.datasets[0].data;
+        const total = data.reduce((a, b) => a + b, 0);
+        const porcentaje = ((value / total) * 100).toFixed(1);
+        return `${porcentaje}%`;
+      },
+      font: {
+        weight: 'bold'
+      }
     }
   },
   scales: {
