@@ -1,0 +1,30 @@
+{
+  "chartTitle": "Ventas por Producto",
+  "xAxisLabel": "Productos",
+  "yAxisLabel": "Ventas (USD)",
+  "barCount": 4,
+  "bars": [
+    {
+      "name": "Producto A",
+      "value": 1200,
+      "color": "#FF6384"
+    },
+    {
+      "name": "Producto B",
+      "value": 1800,
+      "color": "#36A2EB"
+    },
+    {
+      "name": "Producto C",
+      "value": 900,
+      "color": "#FFCE56"
+    },
+    {
+      "name": "Producto D",
+      "value": 1500,
+      "color": "#4BC0C0"
+    }
+  ],
+  "gridColor": "rgba(128, 128, 128, 0.2)",
+  "backgroundColor": "#000000"
+}
