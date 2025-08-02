@@ -1,6 +1,6 @@
 import { baseOptions } from './chartConfig.js';
 
-// Registrar el plugin de datalabels
+// Asegurate de registrar el plugin
 Chart.register(ChartDataLabels);
 
 let chartInstance = null;
@@ -14,6 +14,23 @@ async function cargarGraficoDesdeJSON(nombreArchivo, canvasId, titulo = "") {
   const opciones = structuredClone(baseOptions);
   if (titulo) opciones.plugins.title.text = titulo;
 
+  // Activar el plugin de etiquetas
+  opciones.plugins.datalabels = {
+    color: '#fff',
+    anchor: 'end',
+    align: 'top',
+    formatter: function (value, context) {
+      // Detecta si es porcentaje, sino devuelve valor bruto
+      if (typeof value === 'number') {
+        return value + '%';
+      }
+      return value;
+    },
+    font: {
+      weight: 'bold'
+    }
+  };
+
   if (chartInstance) {
     chartInstance.destroy();
   }
@@ -22,7 +39,7 @@ async function cargarGraficoDesdeJSON(nombreArchivo, canvasId, titulo = "") {
     type: json.type || "bar",
     data: json.data,
     options: opciones,
-    plugins: [ChartDataLabels]  // Habilita datalabels usando config de baseOptions
+    plugins: [ChartDataLabels]
   });
 }
 
