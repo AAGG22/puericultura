@@ -6,12 +6,12 @@
   "bars": [
     {
       "name": "Producto A",
-      "value": 1200,
+      "value": 200,
       "color": "#FF6384"
     },
     {
       "name": "Producto B",
-      "value": 1800,
+      "value": 800,
       "color": "#36A2EB"
     },
     {
@@ -21,7 +21,7 @@
     },
     {
       "name": "Producto D",
-      "value": 1500,
+      "value": 500,
       "color": "#4BC0C0"
     }
   ],
