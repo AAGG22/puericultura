@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizador de Gráficos</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        canvas {
+            margin-top: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Visualizador de Gráficos</h1>
+        <select id="graphSelector">
+            <option value="">Selecciona un gráfico...</option>
+        </select>
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        // Función para cargar la lista de archivos JSON
+        async function loadGraphList() {
+            try {
+                // Esta URL debe apuntar a la carpeta 'graficos' en tu repositorio
+                const response = await fetch('https://github.com/AAGG22/puericultura/tree/main/graficos');
+                
+                if (!response.ok) {
+                    throw new Error('No se pudo cargar la lista de gráficos');
+                }
+                
+                const files = await response.json();
+                const selector = document.getElementById('graphSelector');
+                
+                // Filtrar solo archivos JSON
+                const jsonFiles = files.filter(file => file.name.endsWith('.json'));
+                
+                jsonFiles.forEach(file => {
+                    const option = document.createElement('option');
+                    option.value = file.download_url;
+                    option.textContent = file.name.replace('.json', '');
+                    selector.appendChild(option);
+                });
+                
+                // Cargar el primer gráfico si hay alguno
+                if (jsonFiles.length > 0) {
+                    loadGraph(jsonFiles[0].download_url);
+                }
+                
+            } catch (error) {
+                console.error('Error al cargar la lista de gráficos:', error);
+            }
+        }
+        
+        // Función para cargar y mostrar un gráfico
+        async function loadGraph(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('No se pudo cargar el gráfico');
+                }
+                
+                const graphData = await response.json();
+                renderChart(graphData);
+                
+            } catch (error) {
+                console.error('Error al cargar el gráfico:', error);
+            }
+        }
+        
+        // Función para renderizar el gráfico con Chart.js
+        function renderChart(graphData) {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            
+            // Destruir el gráfico anterior si existe
+            if (window.myChart) {
+                window.myChart.destroy();
+            }
+            
+            // Configurar el gráfico de barras
+            window.myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: graphData.bars.map(bar => bar.name),
+                    datasets: [{
+                        label: graphData.yAxisLabel,
+                        data: graphData.bars.map(bar => bar.value),
+                        backgroundColor: graphData.bars.map(bar => bar.color),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: graphData.chartTitle,
+                            font: {
+                                size: 18
+                            }
+                        },
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: graphData.xAxisLabel
+                            },
+                            grid: {
+                                color: graphData.gridColor
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: graphData.yAxisLabel
+                            },
+                            grid: {
+                                color: graphData.gridColor
+                            },
+                            beginAtZero: true
+                        }
+                    },
+                    backgroundColor: graphData.backgroundColor
+                }
+            });
+        }
+        
+        // Event listener para el selector
+        document.getElementById('graphSelector').addEventListener('change', function() {
+            if (this.value) {
+                loadGraph(this.value);
+            }
+        });
+        
+        // Cargar la lista de gráficos al iniciar
+        loadGraphList();
+    </script>
+</body>
+</html>
