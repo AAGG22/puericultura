@@ -33,7 +33,7 @@
             --select-bg: #2d3748;
             --select-text: #e2e8f0;
             --loading-color: #a0aec0;
-            --percentage-color: #e2e8f0;
+            --percentage-color: #ffffff; /* Blanco puro en modo oscuro */
             --button-bg: #e2e8f0;
             --button-text: #2d3748;
             --chart-text: #e2e8f0;
@@ -162,6 +162,7 @@
             
             const textColor = getComputedStyle(document.documentElement).getPropertyValue('--chart-text');
             const axisColor = getComputedStyle(document.documentElement).getPropertyValue('--axis-color');
+            const percentageColor = getComputedStyle(document.documentElement).getPropertyValue('--percentage-color');
             
             // Actualizar opciones del gráfico
             myChart.options.plugins.title.color = textColor;
@@ -169,6 +170,11 @@
             myChart.options.scales.y.ticks.color = axisColor;
             myChart.options.scales.x.title.color = textColor;
             myChart.options.scales.y.title.color = textColor;
+            
+            // Forzar actualización de los porcentajes
+            if (myChart.plugins.showPercentages) {
+                myChart.update();
+            }
         }
 
         // Función para mostrar errores al usuario
@@ -354,7 +360,7 @@
                     afterDatasetsDraw(chart, args, options) {
                         const {ctx, data, chartArea: {top, bottom, left, right, width, height}, scales: {x, y}} = chart;
                         
-                        ctx.font = '12px Arial';
+                        ctx.font = 'bold 12px Arial';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'bottom';
                         ctx.fillStyle = percentageColor;
