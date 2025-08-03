@@ -35,34 +35,71 @@
             text-align: center;
             color: #444;
         }
+        .error-message {
+            color: #d32f2f;
+            background-color: #fde0e0;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Visualizador de Gráficos</h1>
+        <div id="errorMessage" class="error-message"></div>
         <select id="graphSelector">
-            <option value="">Selecciona un gráfico...</option>
+            <option value="">Cargando gráficos...</option>
         </select>
         <canvas id="myChart"></canvas>
     </div>
 
     <script>
-        // Función para cargar la lista de archivos JSON
+        // Función para mostrar errores al usuario
+        function showError(message) {
+            const errorElement = document.getElementById('errorMessage');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+
+        // Función para ocultar el mensaje de error
+        function hideError() {
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        // Función para cargar la lista de archivos JSON usando la API de GitHub
         async function loadGraphList() {
             try {
-                // Esta URL debe apuntar a la carpeta 'graficos' en tu repositorio
-                const response = await fetch('https://github.com/AAGG22/puericultura/tree/main/graficos');
+                hideError();
+                const selector = document.getElementById('graphSelector');
+                selector.disabled = true;
+                selector.innerHTML = '<option value="">Cargando gráficos...</option>';
+                
+                // URL de la API de GitHub para tu repositorio y carpeta
+                const apiUrl = 'https://api.github.com/repos/AAGG22/puericultura/contents/graficos';
+                
+                const response = await fetch(apiUrl);
                 
                 if (!response.ok) {
-                    throw new Error('No se pudo cargar la lista de gráficos');
+                    throw new Error(`Error HTTP: ${response.status}`);
                 }
                 
                 const files = await response.json();
-                const selector = document.getElementById('graphSelector');
                 
-                // Filtrar solo archivos JSON
-                const jsonFiles = files.filter(file => file.name.endsWith('.json'));
+                // Limpiar el selector
+                selector.innerHTML = '<option value="">Selecciona un gráfico...</option>';
                 
+                // Filtrar solo archivos JSON y ordenarlos alfabéticamente
+                const jsonFiles = files.filter(file => 
+                    file.name.endsWith('.json') && file.type === 'file'
+                ).sort((a, b) => a.name.localeCompare(b.name));
+                
+                if (jsonFiles.length === 0) {
+                    throw new Error('No se encontraron archivos JSON en la carpeta');
+                }
+                
+                // Llenar el selector con los archivos encontrados
                 jsonFiles.forEach(file => {
                     const option = document.createElement('option');
                     option.value = file.download_url;
@@ -70,29 +107,36 @@
                     selector.appendChild(option);
                 });
                 
-                // Cargar el primer gráfico si hay alguno
-                if (jsonFiles.length > 0) {
-                    loadGraph(jsonFiles[0].download_url);
-                }
+                selector.disabled = false;
+                
+                // Cargar el primer gráfico automáticamente
+                loadGraph(jsonFiles[0].download_url);
                 
             } catch (error) {
                 console.error('Error al cargar la lista de gráficos:', error);
+                showError(`Error al cargar los gráficos: ${error.message}`);
+                document.getElementById('graphSelector').innerHTML = '<option value="">Error al cargar gráficos</option>';
             }
         }
         
         // Función para cargar y mostrar un gráfico
         async function loadGraph(url) {
             try {
+                hideError();
+                document.getElementById('myChart').style.display = 'none';
+                
                 const response = await fetch(url);
                 if (!response.ok) {
-                    throw new Error('No se pudo cargar el gráfico');
+                    throw new Error(`Error HTTP: ${response.status}`);
                 }
                 
                 const graphData = await response.json();
                 renderChart(graphData);
+                document.getElementById('myChart').style.display = 'block';
                 
             } catch (error) {
                 console.error('Error al cargar el gráfico:', error);
+                showError(`Error al cargar el gráfico: ${error.message}`);
             }
         }
         
@@ -138,7 +182,7 @@
                                 text: graphData.xAxisLabel
                             },
                             grid: {
-                                color: graphData.gridColor
+                                color: graphData.gridColor || 'rgba(128, 128, 128, 0.2)'
                             }
                         },
                         y: {
@@ -147,12 +191,12 @@
                                 text: graphData.yAxisLabel
                             },
                             grid: {
-                                color: graphData.gridColor
+                                color: graphData.gridColor || 'rgba(128, 128, 128, 0.2)'
                             },
                             beginAtZero: true
                         }
                     },
-                    backgroundColor: graphData.backgroundColor
+                    backgroundColor: graphData.backgroundColor || 'transparent'
                 }
             });
         }
