@@ -1,0 +1,169 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizador de Gráficos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dark {
+            background-color: #1f2937;
+            color: #f9fafb;
+        }
+        .light {
+            background-color: #f9fafb;
+            color: #1f2937;
+        }
+        canvas {
+            max-width: 600px;
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body class="light min-h-screen flex flex-col items-center justify-center p-4">
+    <div class="w-full max-w-2xl bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-2xl font-bold">Visualizador de Gráficos</h1>
+            <button id="themeToggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+                <svg class="w-6 h-6 text-gray-800 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="mb-4">
+            <label for="chartSelect" class="block text-sm font-medium mb-2">Seleccionar Gráfico</label>
+            <select id="chartSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                <option value="ventas.json">Ventas por Producto</option>
+                <!-- Agrega más opciones dinámicamente si tienes un backend -->
+            </select>
+        </div>
+        <div class="flex justify-center">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Datos de ejemplo basados en el JSON proporcionado
+        const chartData = {
+            chartTitle: "Ventas por Producto",
+            xAxisLabel: "Productos",
+            yAxisLabel: "Ventas (USD)",
+            barCount: 4,
+            bars: [
+                { name: "Producto A", value: 200, color: "#FF6384" },
+                { name: "Producto B", value: 800, color: "#36A2EB" },
+                { name: "Producto C", value: 900, color: "#FFCE56" },
+                { name: "Producto D", value: 500, color: "#4BC0C0" }
+            ],
+            gridColor: "rgba(128, 128, 128, 0.2)",
+            backgroundColor: "#000000"
+        };
+
+        // Configuración inicial del gráfico
+        const ctx = document.getElementById('myChart').getContext('2d');
+        let chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: chartData.bars.map(bar => bar.name),
+                datasets: [{
+                    label: chartData.yAxisLabel,
+                    data: chartData.bars.map(bar => bar.value),
+                    backgroundColor: chartData.bars.map(bar => bar.color),
+                    borderColor: chartData.bars.map(bar => bar.color),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: chartData.chartTitle,
+                        font: { size: 18 }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: chartData.xAxisLabel },
+                        grid: { color: chartData.gridColor }
+                    },
+                    y: {
+                        title: { display: true, text: chartData.yAxisLabel },
+                        grid: { color: chartData.gridColor },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Modo claro/oscuro
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            document.body.classList.toggle('light');
+            const isDark = document.body.classList.contains('dark');
+            chart.options.scales.x.grid.color = isDark ? 'rgba(255, 255, 255, 0.2)' : chartData.gridColor;
+            chart.options.scales.y.grid.color = isDark ? 'rgba(255, 255, 255, 0.2)' : chartData.gridColor;
+            chart.update();
+        });
+
+        // Lógica para cambiar de gráfico (simulada)
+        document.getElementById('chartSelect').addEventListener('change', (e) => {
+            // Aquí iría la lógica para cargar el archivo JSON seleccionado
+            // Por ahora, usamos los datos de ejemplo
+            chart.data.labels = chartData.bars.map(bar => bar.name);
+            chart.data.datasets[0].data = chartData.bars.map(bar => bar.value);
+            chart.data.datasets[0].backgroundColor = chartData.bars.map(bar => bar.color);
+            chart.data.datasets[0].borderColor = chartData.bars.map(bar => bar.color);
+            chart.options.plugins.title.text = chartData.chartTitle;
+            chart.options.scales.x.title.text = chartData.xAxisLabel;
+            chart.options.scales.y.title.text = chartData.yAxisLabel;
+            chart.update();
+        });
+    </script>
+</body>
+</html>
