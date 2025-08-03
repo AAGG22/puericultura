@@ -9,5 +9,4 @@
   { "archivo": "Puericultura_Informacion.json", "titulo": "Información sobre Puericultura" },
   { "archivo": "Reingresos_por_Localidad.json", "titulo": "Reingresos Hospitalarios por Localidad" },
   { "archivo": "Tipo_Alimentacion.json", "titulo": "Distribución por Tipo de Alimentación" }
-  { "archivo": "chart-config.json", "titulo": "222222" }
 ]
