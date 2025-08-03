@@ -43,6 +43,10 @@
             margin-bottom: 20px;
             display: none;
         }
+        .loading {
+            color: #666;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -50,12 +54,15 @@
         <h1>Visualizador de Gráficos</h1>
         <div id="errorMessage" class="error-message"></div>
         <select id="graphSelector">
-            <option value="">Cargando gráficos...</option>
+            <option value="" class="loading">Cargando gráficos...</option>
         </select>
         <canvas id="myChart"></canvas>
     </div>
 
     <script>
+        // Variable global para almacenar la instancia del gráfico
+        let myChart = null;
+
         // Función para mostrar errores al usuario
         function showError(message) {
             const errorElement = document.getElementById('errorMessage');
@@ -74,7 +81,7 @@
                 hideError();
                 const selector = document.getElementById('graphSelector');
                 selector.disabled = true;
-                selector.innerHTML = '<option value="">Cargando gráficos...</option>';
+                selector.innerHTML = '<option value="" class="loading">Cargando gráficos...</option>';
                 
                 // URL de la API de GitHub para tu repositorio y carpeta
                 const apiUrl = 'https://api.github.com/repos/AAGG22/puericultura/contents/graficos';
@@ -145,12 +152,12 @@
             const ctx = document.getElementById('myChart').getContext('2d');
             
             // Destruir el gráfico anterior si existe
-            if (window.myChart) {
-                window.myChart.destroy();
+            if (myChart !== null && typeof myChart.destroy === 'function') {
+                myChart.destroy();
             }
             
             // Configurar el gráfico de barras
-            window.myChart = new Chart(ctx, {
+            myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: graphData.bars.map(bar => bar.name),
