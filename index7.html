@@ -19,6 +19,8 @@
             --percentage-color: #666;
             --button-bg: #4a5568;
             --button-text: white;
+            --chart-text: #666;
+            --axis-color: #666;
         }
 
         [data-theme="dark"] {
@@ -31,9 +33,11 @@
             --select-bg: #2d3748;
             --select-text: #e2e8f0;
             --loading-color: #a0aec0;
-            --percentage-color: #a0aec0;
+            --percentage-color: #e2e8f0;
             --button-bg: #e2e8f0;
             --button-text: #2d3748;
+            --chart-text: #e2e8f0;
+            --axis-color: #a0aec0;
         }
 
         body {
@@ -147,8 +151,24 @@
             
             // Redibujar el gráfico para aplicar los nuevos colores
             if (myChart) {
+                updateChartColors();
                 myChart.update();
             }
+        }
+
+        // Función para actualizar colores del gráfico según el tema
+        function updateChartColors() {
+            if (!myChart) return;
+            
+            const textColor = getComputedStyle(document.documentElement).getPropertyValue('--chart-text');
+            const axisColor = getComputedStyle(document.documentElement).getPropertyValue('--axis-color');
+            
+            // Actualizar opciones del gráfico
+            myChart.options.plugins.title.color = textColor;
+            myChart.options.scales.x.ticks.color = axisColor;
+            myChart.options.scales.y.ticks.color = axisColor;
+            myChart.options.scales.x.title.color = textColor;
+            myChart.options.scales.y.title.color = textColor;
         }
 
         // Función para mostrar errores al usuario
@@ -247,6 +267,11 @@
             const values = graphData.bars.map(bar => bar.value);
             const percentages = calculatePercentages(values);
             
+            // Obtener colores del tema actual
+            const textColor = getComputedStyle(document.documentElement).getPropertyValue('--chart-text');
+            const axisColor = getComputedStyle(document.documentElement).getPropertyValue('--axis-color');
+            const percentageColor = getComputedStyle(document.documentElement).getPropertyValue('--percentage-color');
+            
             // Destruir el gráfico anterior si existe
             if (myChart !== null && typeof myChart.destroy === 'function') {
                 myChart.destroy();
@@ -273,7 +298,7 @@
                             font: {
                                 size: 18
                             },
-                            color: 'var(--text-color)'
+                            color: textColor
                         },
                         legend: {
                             display: false
@@ -287,8 +312,8 @@
                                     return `${label}: $${value} (${percentage}%)`;
                                 }
                             },
-                            bodyColor: 'var(--text-color)',
-                            titleColor: 'var(--text-color)',
+                            bodyColor: textColor,
+                            titleColor: textColor,
                             backgroundColor: 'var(--container-bg)',
                             borderColor: 'var(--border-color)'
                         }
@@ -298,26 +323,26 @@
                             title: {
                                 display: true,
                                 text: graphData.xAxisLabel,
-                                color: 'var(--text-color)'
+                                color: textColor
                             },
                             grid: {
                                 color: graphData.gridColor || 'var(--border-color)'
                             },
                             ticks: {
-                                color: 'var(--text-color)'
+                                color: axisColor
                             }
                         },
                         y: {
                             title: {
                                 display: true,
                                 text: graphData.yAxisLabel,
-                                color: 'var(--text-color)'
+                                color: textColor
                             },
                             grid: {
                                 color: graphData.gridColor || 'var(--border-color)'
                             },
                             ticks: {
-                                color: 'var(--text-color)'
+                                color: axisColor
                             },
                             beginAtZero: true
                         }
@@ -332,7 +357,7 @@
                         ctx.font = '12px Arial';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'bottom';
-                        ctx.fillStyle = 'var(--percentage-color)';
+                        ctx.fillStyle = percentageColor;
                         
                         data.datasets.forEach(dataset => {
                             dataset.data.forEach((value, index) => {
