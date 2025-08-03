@@ -1,0 +1,20 @@
+{
+  "chartTitle": "Nacimientos por Tipo (Parto vs. Cesárea)",
+  "xAxisLabel": "Tipo de Nacimiento",
+  "yAxisLabel": "Cantidad de Nacimientos",
+  "barCount": 2,
+  "bars": [
+    {
+      "name": "Parto",
+      "value": 1050,
+      "color": "#36A2EB"
+    },
+    {
+      "name": "Cesárea",
+      "value": 846,
+      "color": "#FF6384"
+    }
+  ],
+  "gridColor": "rgba(128, 128, 128, 0.2)",
+  "backgroundColor": "#000000"
+}

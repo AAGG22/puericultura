@@ -1,0 +1,20 @@
+{
+  "chartTitle": "Tipo de Alimentación en Pacientes con Asistencia Requerida",
+  "xAxisLabel": "Tipo de Alimentación",
+  "yAxisLabel": "Cantidad de Pacientes",
+  "barCount": 2,
+  "bars": [
+    {
+      "name": "Pecho Exclusivo",
+      "value": 834,
+      "color": "#36A2EB"
+    },
+    {
+      "name": "Lactancia Mixta",
+      "value": 176,
+      "color": "#FF6384"
+    }
+  ],
+  "gridColor": "rgba(128, 128, 128, 0.2)",
+  "backgroundColor": "#000000"
+}

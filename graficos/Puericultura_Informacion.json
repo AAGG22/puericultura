@@ -1,0 +1,30 @@
+{
+  "chartTitle": "Binomios Capacitados por Tema de Puericultura",
+  "xAxisLabel": "Tema de Capacitación",
+  "yAxisLabel": "Cantidad de Binomios",
+  "barCount": 4,
+  "bars": [
+    {
+      "name": "Lavado de Manos (TL)",
+      "value": 1901,
+      "color": "#36A2EB"
+    },
+    {
+      "name": "Signos de Alarma (SS)",
+      "value": 1901,
+      "color": "#FF6384"
+    },
+    {
+      "name": "Alertas (ALAS)",
+      "value": 1654,
+      "color": "#4BC0C0"
+    },
+    {
+      "name": "Otros Temas",
+      "value": 1901,
+      "color": "#FFCE56"
+    }
+  ],
+  "gridColor": "rgba(128, 128, 128, 0.2)",
+  "backgroundColor": "#000000"
+}

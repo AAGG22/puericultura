@@ -1,0 +1,20 @@
+{
+  "chartTitle": "Reingresos por Localidad",
+  "xAxisLabel": "Localidad",
+  "yAxisLabel": "Cantidad de Reingresos",
+  "barCount": 2,
+  "bars": [
+    {
+      "name": "San Luis",
+      "value": 5,
+      "color": "#36A2EB"
+    },
+    {
+      "name": "Otras",
+      "value": 0,
+      "color": "#FF6384"
+    }
+  ],
+  "gridColor": "rgba(128, 128, 128, 0.2)",
+  "backgroundColor": "#000000"
+}

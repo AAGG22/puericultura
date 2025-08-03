@@ -1,0 +1,20 @@
+{
+  "chartTitle": "Pacientes con Asistencia Requerida",
+  "xAxisLabel": "Asistencia Requerida",
+  "yAxisLabel": "Cantidad de Pacientes",
+  "barCount": 2,
+  "bars": [
+    {
+      "name": "Requiere Asistencia",
+      "value": 1010,
+      "color": "#36A2EB"
+    },
+    {
+      "name": "No Requiere Asistencia",
+      "value": 891,
+      "color": "#FF6384"
+    }
+  ],
+  "gridColor": "rgba(128, 128, 128, 0.2)",
+  "backgroundColor": "#000000"
+}

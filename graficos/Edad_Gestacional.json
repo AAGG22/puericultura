@@ -1,0 +1,35 @@
+{
+  "chartTitle": "Distribución de Bebés por Edad Gestacional",
+  "xAxisLabel": "Edad Gestacional",
+  "yAxisLabel": "Cantidad de Bebés",
+  "barCount": 5,
+  "bars": [
+    {
+      "name": "34 semanas",
+      "value": 15,
+      "color": "#36A2EB"
+    },
+    {
+      "name": "35 semanas",
+      "value": 47,
+      "color": "#FF6384"
+    },
+    {
+      "name": "36 semanas",
+      "value": 128,
+      "color": "#4BC0C0"
+    },
+    {
+      "name": "37 semanas",
+      "value": 277,
+      "color": "#FFCE56"
+    },
+    {
+      "name": "≥38 semanas",
+      "value": 1434,
+      "color": "#E7E9ED"
+    }
+  ],
+  "gridColor": "rgba(128, 128, 128, 0.2)",
+  "backgroundColor": "#000000"
+}

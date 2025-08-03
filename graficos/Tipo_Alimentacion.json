@@ -1,0 +1,20 @@
+{
+  "chartTitle": "Tipo de Alimentación (Pecho Exclusivo vs. Lactancia Mixta)",
+  "xAxisLabel": "Tipo de Alimentación",
+  "yAxisLabel": "Cantidad de Bebés",
+  "barCount": 2,
+  "bars": [
+    {
+      "name": "Pecho Exclusivo",
+      "value": 1644,
+      "color": "#36A2EB"
+    },
+    {
+      "name": "Lactancia Mixta",
+      "value": 252,
+      "color": "#FF6384"
+    }
+  ],
+  "gridColor": "rgba(128, 128, 128, 0.2)",
+  "backgroundColor": "#000000"
+}
