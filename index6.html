@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizador de Gráficos</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        canvas {
+            margin-top: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #444;
+        }
+        .error-message {
+            color: #d32f2f;
+            background-color: #fde0e0;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .loading {
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Visualizador de Gráficos</h1>
+        <div id="errorMessage" class="error-message"></div>
+        <select id="graphSelector">
+            <option value="" class="loading">Cargando gráficos...</option>
+        </select>
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        // Variable global para almacenar la instancia del gráfico
+        let myChart = null;
+
+        // Función para mostrar errores al usuario
+        function showError(message) {
+            const errorElement = document.getElementById('errorMessage');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+
+        // Función para ocultar el mensaje de error
+        function hideError() {
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        // Función para calcular porcentajes
+        function calculatePercentages(values) {
+            const total = values.reduce((sum, value) => sum + value, 0);
+            return values.map(value => total > 0 ? Math.round((value / total) * 100) : 0);
+        }
+
+        // Función para cargar la lista de archivos JSON usando la API de GitHub
+        async function loadGraphList() {
+            try {
+                hideError();
+                const selector = document.getElementById('graphSelector');
+                selector.disabled = true;
+                selector.innerHTML = '<option value="" class="loading">Cargando gráficos...</option>';
+                
+                // URL de la API de GitHub para tu repositorio y carpeta
+                const apiUrl = 'https://api.github.com/repos/AAGG22/puericultura/contents/graficos';
+                
+                const response = await fetch(apiUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+                
+                const files = await response.json();
+                
+                // Limpiar el selector
+                selector.innerHTML = '<option value="">Selecciona un gráfico...</option>';
+                
+                // Filtrar solo archivos JSON y ordenarlos alfabéticamente
+                const jsonFiles = files.filter(file => 
+                    file.name.endsWith('.json') && file.type === 'file'
+                ).sort((a, b) => a.name.localeCompare(b.name));
+                
+                if (jsonFiles.length === 0) {
+                    throw new Error('No se encontraron archivos JSON en la carpeta');
+                }
+                
+                // Llenar el selector con los archivos encontrados
+                jsonFiles.forEach(file => {
+                    const option = document.createElement('option');
+                    option.value = file.download_url;
+                    option.textContent = file.name.replace('.json', '');
+                    selector.appendChild(option);
+                });
+                
+                selector.disabled = false;
+                
+                // Cargar el primer gráfico automáticamente
+                loadGraph(jsonFiles[0].download_url);
+                
+            } catch (error) {
+                console.error('Error al cargar la lista de gráficos:', error);
+                showError(`Error al cargar los gráficos: ${error.message}`);
+                document.getElementById('graphSelector').innerHTML = '<option value="">Error al cargar gráficos</option>';
+            }
+        }
+        
+        // Función para cargar y mostrar un gráfico
+        async function loadGraph(url) {
+            try {
+                hideError();
+                document.getElementById('myChart').style.display = 'none';
+                
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+                
+                const graphData = await response.json();
+                renderChart(graphData);
+                document.getElementById('myChart').style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error al cargar el gráfico:', error);
+                showError(`Error al cargar el gráfico: ${error.message}`);
+            }
+        }
+        
+        // Función para renderizar el gráfico con Chart.js
+        function renderChart(graphData) {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const values = graphData.bars.map(bar => bar.value);
+            const percentages = calculatePercentages(values);
+            
+            // Destruir el gráfico anterior si existe
+            if (myChart !== null && typeof myChart.destroy === 'function') {
+                myChart.destroy();
+            }
+            
+            // Configurar el gráfico de barras
+            myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: graphData.bars.map(bar => bar.name),
+                    datasets: [{
+                        label: graphData.yAxisLabel,
+                        data: values,
+                        backgroundColor: graphData.bars.map(bar => bar.color),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: graphData.chartTitle,
+                            font: {
+                                size: 18
+                            }
+                        },
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.dataset.label || '';
+                                    const value = context.raw;
+                                    const percentage = percentages[context.dataIndex];
+                                    return `${label}: $${value} (${percentage}%)`;
+                                }
+                            }
+                        },
+                        datalabels: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: graphData.xAxisLabel
+                            },
+                            grid: {
+                                color: graphData.gridColor || 'rgba(128, 128, 128, 0.2)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: graphData.yAxisLabel
+                            },
+                            grid: {
+                                color: graphData.gridColor || 'rgba(128, 128, 128, 0.2)'
+                            },
+                            beginAtZero: true
+                        }
+                    },
+                    backgroundColor: graphData.backgroundColor || 'transparent'
+                },
+                plugins: [{
+                    id: 'showPercentages',
+                    afterDatasetsDraw(chart, args, options) {
+                        const {ctx, data, chartArea: {top, bottom, left, right, width, height}, scales: {x, y}} = chart;
+                        
+                        ctx.font = '12px Arial';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+                        ctx.fillStyle = '#666';
+                        
+                        data.datasets.forEach(dataset => {
+                            dataset.data.forEach((value, index) => {
+                                const percentage = percentages[index];
+                                const xPos = x.getPixelForValue(index);
+                                const yPos = y.getPixelForValue(value) - 5;
+                                
+                                ctx.fillText(`${percentage}%`, xPos, yPos);
+                            });
+                        });
+                    }
+                }]
+            });
+        }
+        
+        // Event listener para el selector
+        document.getElementById('graphSelector').addEventListener('change', function() {
+            if (this.value) {
+                loadGraph(this.value);
+            }
+        });
+        
+        // Cargar la lista de gráficos al iniciar
+        loadGraphList();
+    </script>
+</body>
+</html>
