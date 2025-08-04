@@ -6,12 +6,12 @@
   "bars": [
     {
       "name": "Parto",
-      "value": 1050,
+      "value": 759,
       "color": "#36A2EB"
     },
     {
       "name": "Cesárea",
-      "value": 846,
+      "value": 852,
       "color": "#FF6384"
     }
   ],
