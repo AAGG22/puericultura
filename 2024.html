@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puericultura 2025</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-color: #f5f5f5;
+            --text-color: #333;
+            --container-bg: white;
+            --border-color: #ddd;
+            --error-bg: #fde0e0;
+            --error-text: #d32f2f;
+            --select-bg: white;
+            --select-text: #333;
+            --loading-color: #666;
+            --percentage-color: #666;
+            --button-bg: #4a5568;
+            --button-text: white;
+            --chart-text: #666;
+            --axis-color: #666;
+            --tooltip-bg: white;
+            --tooltip-text: #333;
+            --tooltip-border: #ddd;
+            --footer-bg: #f0f0f0;
+            --footer-text: #555;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a202c;
+            --text-color: #ffffff;
+            /* Blanco desde el inicio */
+            --container-bg: #2d3748;
+            --border-color: #4a5568;
+            --error-bg: #742a2a;
+            --error-text: #fed7d7;
+            --select-bg: #2d3748;
+            --select-text: #ffffff;
+            /* Blanco desde el inicio */
+            --loading-color: #a0aec0;
+            --percentage-color: #ffffff;
+            /* Blanco puro */
+            --button-bg: #e2e8f0;
+            --button-text: #2d3748;
+            --chart-text: #ffffff;
+            /* Blanco desde el inicio */
+            --axis-color: #a0aec0;
+            --tooltip-bg: #2d3748;
+            /* Fondo oscuro para tooltips */
+            --tooltip-text: #ffffff;
+            /* Texto blanco */
+            --tooltip-border: #4a5568;
+            /* Borde oscuro */
+            --footer-bg: #2d3748;
+            --footer-text: #a0aec0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            background-color: var(--container-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: var(--select-bg);
+            color: var(--select-text);
+            transition: all 0.3s;
+        }
+
+        canvas {
+            margin-top: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--text-color);
+        }
+
+        .error-message {
+            color: var(--error-text);
+            background-color: var(--error-bg);
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .loading {
+            color: var(--loading-color);
+            font-style: italic;
+        }
+
+        .theme-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .theme-btn {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .theme-btn:hover {
+            opacity: 0.9;
+        }
+
+        .header {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            border-radius: 8px;
+            font-size: 12px;
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+
+        .footer a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-copyright {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+            font-size: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Análisis de variables clínicas</h1>
+            <p align="center">Año 2024 (muestra de 1220 pacientes)</p>
+            <div class="theme-switcher">
+                <button class="theme-btn" id="themeToggle">Modo Oscuro</button>
+            </div>
+        </div>
+
+        <div id="errorMessage" class="error-message"></div>
+        <select id="graphSelector">
+            <option value="" class="loading">Cargando gráficos...</option>
+        </select>
+        <canvas id="myChart"></canvas>
+
+
+        <!-- Nuevo Footer -->
+        <div class="footer">
+            <p><strong>Dirección del Proyecto:</strong> Lic. Valeria Flores (<a
+                    href="mailto:vflores@gmail.com.ar">valerianoemiflores.vnf@gmail.com</a>)</p>
+            <p><strong>Desarrollo web:</strong> Tec. Alfredo Galván (<a
+                    href="mailto:alfredodgalvan@gmail.com.ar">alfredodgalvan@gmail.com</a>)</p>
+            <p>Población: 1904 pacientes | Metodología: Estadística descriptiva</p>
+            <div class="footer-copyright">
+                © 2025 Valeria Flores & Alfredo Galván. Todos los derechos reservados.
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    <script>
+        // Variable global para almacenar la instancia del gráfico
+        let myChart = null;
+        let currentTheme = 'light';
+
+        // Función para cambiar entre modo claro y oscuro
+        function toggleTheme() {
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            currentTheme = newTheme;
+            document.getElementById('themeToggle').textContent =
+                newTheme === 'light' ? 'Modo Oscuro' : 'Modo Claro';
+
+            // Redibujar el gráfico para aplicar los nuevos colores
+            if (myChart) {
+                updateChartColors();
+                myChart.update();
+            }
+        }
+
+        // Función para actualizar colores del gráfico según el tema
+        function updateChartColors() {
+            if (!myChart) return;
+
+            const textColor = getComputedStyle(document.documentElement).getPropertyValue('--chart-text');
+            const axisColor = getComputedStyle(document.documentElement).getPropertyValue('--axis-color');
+            const percentageColor = getComputedStyle(document.documentElement).getPropertyValue('--percentage-color');
+            const tooltipBg = getComputedStyle(document.documentElement).getPropertyValue('--tooltip-bg');
+            const tooltipText = getComputedStyle(document.documentElement).getPropertyValue('--tooltip-text');
+            const tooltipBorder = getComputedStyle(document.documentElement).getPropertyValue('--tooltip-border');
+
+            // Actualizar opciones del gráfico
+            myChart.options.plugins.title.color = textColor;
+            myChart.options.scales.x.ticks.color = axisColor;
+            myChart.options.scales.y.ticks.color = axisColor;
+            myChart.options.scales.x.title.color = textColor;
+            myChart.options.scales.y.title.color = textColor;
+
+            // Actualizar tooltips
+            myChart.options.plugins.tooltip.backgroundColor = tooltipBg;
+            myChart.options.plugins.tooltip.bodyColor = tooltipText;
+            myChart.options.plugins.tooltip.titleColor = tooltipText;
+            myChart.options.plugins.tooltip.borderColor = tooltipBorder;
+        }
+
+        // Función para mostrar errores al usuario
+        function showError(message) {
+            const errorElement = document.getElementById('errorMessage');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+
+        // Función para ocultar el mensaje de error
+        function hideError() {
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        // Función para calcular porcentajes
+        function calculatePercentages(values) {
+            const total = values.reduce((sum, value) => sum + value, 0);
+            return values.map(value => total > 0 ? Math.round((value / total) * 100) : 0);
+        }
+
+        // Función para cargar la lista de archivos JSON usando la API de GitHub
+        async function loadGraphList() {
+            try {
+                hideError();
+                const selector = document.getElementById('graphSelector');
+                selector.disabled = true;
+                selector.innerHTML = '<option value="" class="loading">Cargando gráficos...</option>';
+
+                // URL de la API de GitHub para tu repositorio y carpeta
+                const apiUrl = 'https://api.github.com/repos/AAGG22/puericultura/contents/2024';
+
+                const response = await fetch(apiUrl);
+
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+
+                const files = await response.json();
+
+                // Limpiar el selector
+                selector.innerHTML = '<option value="">Selecciona un gráfico...</option>';
+
+                // Filtrar solo archivos JSON y ordenarlos alfabéticamente
+                const jsonFiles = files.filter(file =>
+                    file.name.endsWith('.json') && file.type === 'file'
+                ).sort((a, b) => a.name.localeCompare(b.name));
+
+                if (jsonFiles.length === 0) {
+                    throw new Error('No se encontraron archivos JSON en la carpeta');
+                }
+
+                // Llenar el selector con los archivos encontrados
+                jsonFiles.forEach(file => {
+                    const option = document.createElement('option');
+                    option.value = file.download_url;
+                    option.textContent = file.name.replace('.json', '');
+                    selector.appendChild(option);
+                });
+
+                selector.disabled = false;
+
+                // Cargar el primer gráfico automáticamente
+                loadGraph(jsonFiles[0].download_url);
+                
+            } catch (error) {
+                console.error('Error al cargar la lista de gráficos:', error);
+                showError(`Error al cargar los gráficos: ${error.message}`);
+                document.getElementById('graphSelector').innerHTML = '<option value="">Error al cargar gráficos</option>';
+            }
+        }
+
+        // Función para cargar y mostrar un gráfico
+        async function loadGraph(url) {
+            try {
+                hideError();
+                document.getElementById('myChart').style.display = 'none';
+
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+
+                const graphData = await response.json();
+                renderChart(graphData);
+                document.getElementById('myChart').style.display = 'block';
+
+            } catch (error) {
+                console.error('Error al cargar el gráfico:', error);
+                showError(`Error al cargar el gráfico: ${error.message}`);
+            }
+        }
+
+        // Función para renderizar el gráfico con Chart.js
+        function renderChart(graphData) {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const values = graphData.bars.map(bar => bar.value);
+            const percentages = calculatePercentages(values);
+
+            // Obtener colores del tema actual
+            const textColor = getComputedStyle(document.documentElement).getPropertyValue('--chart-text');
+            const axisColor = getComputedStyle(document.documentElement).getPropertyValue('--axis-color');
+            const percentageColor = getComputedStyle(document.documentElement).getPropertyValue('--percentage-color');
+            const tooltipBg = getComputedStyle(document.documentElement).getPropertyValue('--tooltip-bg');
+            const tooltipText = getComputedStyle(document.documentElement).getPropertyValue('--tooltip-text');
+            const tooltipBorder = getComputedStyle(document.documentElement).getPropertyValue('--tooltip-border');
+
+            // Destruir el gráfico anterior si existe
+            if (myChart !== null && typeof myChart.destroy === 'function') {
+                myChart.destroy();
+            }
+
+            // Configurar el gráfico de barras
+            myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: graphData.bars.map(bar => bar.name),
+                    datasets: [{
+                        label: graphData.yAxisLabel,
+                        data: values,
+                        backgroundColor: graphData.bars.map(bar => bar.color),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: graphData.chartTitle,
+                            font: {
+                                size: 18
+                            },
+                            color: textColor
+                        },
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    const label = context.dataset.label || '';
+                                    const value = context.raw;
+                                    const percentage = percentages[context.dataIndex];
+                                    return `${label}: ${value} (${percentage}%)`; // <-- Aquí estaba el $
+                                }
+                            },
+                            backgroundColor: tooltipBg,
+                            bodyColor: tooltipText,
+                            titleColor: tooltipText,
+                            borderColor: tooltipBorder,
+                            borderWidth: 1,
+                            padding: 10,
+                            displayColors: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: graphData.xAxisLabel,
+                                color: textColor
+                            },
+                            grid: {
+                                color: graphData.gridColor || 'var(--border-color)',
+                                display: false
+                            },
+                            ticks: {
+                                color: axisColor
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: graphData.yAxisLabel,
+                                color: textColor
+                            },
+                            grid: {
+                                color: graphData.gridColor || 'var(--border-color)'
+                            },
+                            ticks: {
+                                color: axisColor
+                            },
+                            beginAtZero: true
+                        }
+                    },
+                    backgroundColor: graphData.backgroundColor || 'transparent'
+                },
+                plugins: [{
+                    id: 'showPercentages',
+                    afterDatasetsDraw(chart, args, options) {
+                        const { ctx, data, chartArea: { top, bottom, left, right, width, height }, scales: { x, y } } = chart;
+
+                        ctx.font = 'bold 12px Arial';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+                        ctx.fillStyle = percentageColor;
+
+                        data.datasets.forEach(dataset => {
+                            dataset.data.forEach((value, index) => {
+                                const percentage = percentages[index];
+                                const xPos = x.getPixelForValue(index);
+                                const yPos = y.getPixelForValue(value) - 5;
+
+                                ctx.fillText(`${percentage}%`, xPos, yPos);
+                            });
+                        });
+                    }
+                }]
+            });
+        }
+
+        // Event listener para el selector
+        document.getElementById('graphSelector').addEventListener('change', function () {
+            if (this.value) {
+                loadGraph(this.value);
+            }
+        });
+
+        // Event listener para el botón de tema
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+        // Inicializar con modo claro
+        document.documentElement.setAttribute('data-theme', 'light');
+
+        // Cargar la lista de gráficos al iniciar
+        loadGraphList();
+    </script>
+</body>
+
+</html>
