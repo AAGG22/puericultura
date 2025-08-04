@@ -1,0 +1,20 @@
+{
+  "chartTitle": "Tipo de Nacimiento (Parto Natural vs Cesárea)",
+  "xAxisLabel": "Tipo de Nacimiento",
+  "yAxisLabel": "Cantidad",
+  "barCount": 2,
+  "bars": [
+    {
+      "name": "Cesárea",
+      "value": 637,
+      "color": "#36A2EB"
+    },
+    {
+      "name": "Parto Natural",
+      "value": 565,
+      "color": "#FF6384"
+    }
+  ],
+  "gridColor": "rgba(128, 128, 128, 0.2)",
+  "backgroundColor": "#000000"
+}
