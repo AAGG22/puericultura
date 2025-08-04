@@ -1,0 +1,70 @@
+{
+  "chartTitle": "Datos de Puericultura",
+  "xAxisLabel": "Categoría",
+  "yAxisLabel": "Cantidad",
+  "barCount": 12,
+  "bars": [
+    {
+      "name": "Beneficios",
+      "value": 1220,
+      "color": "#36A2EB"
+    },
+    {
+      "name": "Tiempo c/Succion",
+      "value": 1220,
+      "color": "#FF6384"
+    },
+    {
+      "name": "Frecuencia Alimentacion",
+      "value": 1220,
+      "color": "#FFFF84"
+    },
+    {
+      "name": "Regla de Oro",
+      "value": 1220,
+      "color": "#4BC0C0"
+    },
+    {
+      "name": "Tec.Prendida de pecho",
+      "value": 1220,
+      "color": "#FFCE56"
+    },
+    {
+      "name": "ALAS",
+      "value": 574,
+      "color": "#E7E9ED"
+    },
+    {
+      "name": "Extracción/Conservación LH",
+      "value": 1190,
+      "color": "#9966FF"
+    },
+    {
+      "name": "Señal de hambre",
+      "value": 1220,
+      "color": "#FF9F40"
+    },
+    {
+      "name": "Signos Saciedad",
+      "value": 1220,
+      "color": "#66CCCC"
+    },
+    {
+      "name": "Lavado de Manos",
+      "value": 1220,
+      "color": "#FF6666"
+    },
+    {
+      "name": "Prevencion BQL",
+      "value": 1220,
+      "color": "#99CC99"
+    },
+    {
+      "name": "Envio Info Wapp",
+      "value": 1217,
+      "color": "#CC99CC"
+    }
+  ],
+  "gridColor": "rgba(128, 128, 128, 0.2)",
+  "backgroundColor": "#000000"
+}
