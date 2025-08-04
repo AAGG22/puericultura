@@ -42,78 +42,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Análisis de variables clínicas 2024</title>
+    <title>Análisis de variables clínicas</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #000000;
-            color: #ffffff;
+            background-color: #000;
+            color: #fff;
             text-align: center;
             margin: 0;
             padding: 20px;
         }
-        h1, h2, p {
-            margin: 10px 0;
-        }
-        .dark-mode-toggle {
-            margin: 10px 0;
+        h1 {
+            font-size: 2em;
         }
         #chart-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        canvas {
+            background-color: #000;
+        }
+        .info {
             margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <h1>Análisis de variables clínicas</h1>
-    <h2>Año 2024 (muestra de 1220 pacientes)</h2>
-    <div class="dark-mode-toggle">
-        <button onclick="toggleDarkMode()">Modo Oscuro</button>
-    </div>
+    <p>Año 2024 (muestra de 1220 pacientes)</p>
+    <button onclick="toggleDarkMode()">Modo Oscuro</button>
     <div id="chart-container">
         <p>Cargando gráficos...</p>
+        <canvas id="puericulturaChart"></canvas>
     </div>
-    <p>Población: 1220 pacientes | Metodología: Estadística descriptiva</p>
-    <p>
-        Dirección del Proyecto: Lic. Valeria Flores (<a href="mailto:valerianoemiflores.vnf@gmail.com">valerianoemiflores.vnf@gmail.com</a>) -
-        Desarrollo web: Tec. Alfredo Galván (<a href="mailto:alfredodgalvan@gmail.com">alfredodgalvan@gmail.com</a>)
-    </p>
-    <p>© 2025 Valeria Flores & Alfredo Galván. Todos los derechos reservados.</p>
+    <div class="info">
+        <p>Población: 1220 pacientes | Metodología: Estadística descriptiva</p>
+        <p>Dirección del Proyecto: Lic. Valeria Flores (<a href="mailto:valerianoemiflores.vnf@gmail.com">valerianoemiflores.vnf@gmail.com</a>) - 
+        Desarrollo web: Tec. Alfredo Galván (<a href="mailto:alfredodgalvan@gmail.com">alfredodgalvan@gmail.com</a>)</p>
+        <p>© 2025 Valeria Flores & Alfredo Galván. Todos los derechos reservados.</p>
+    </div>
 
     <script>
-        // Función para calcular porcentajes basada en la población
-        function calculatePercentages(data) {
-            const poblacion = data.poblacion;
-            return data.bars.map(bar => poblacion > 0 ? ((bar.value / poblacion) * 100).toFixed(2) : 0);
-        }
-
-        // Cargar y procesar el archivo JSON
-        async function loadChartData() {
-            try {
-                const response = await fetch('Puericultura.json');
-                const data = await response.json();
-                const percentages = calculatePercentages(data);
-                
-                // Mostrar los porcentajes en la consola (puedes integrarlo con tu gráfica)
-                console.log('Porcentajes por categoría:', percentages);
-                
-                // Ejemplo: Actualizar el contenedor con los porcentajes
-                const container = document.getElementById('chart-container');
-                container.innerHTML = '<h3>Porcentajes por Categoría</h3><ul>' + 
-                    data.bars.map((bar, index) => 
-                        `<li>${bar.name}: ${percentages[index]}%</li>`
-                    ).join('') + '</ul>';
-            } catch (error) {
-                console.error('Error al cargar el JSON:', error);
-            }
-        }
-
-        // Función para alternar modo oscuro (mantenida del original)
+        // Función para alternar modo oscuro (asumiendo que existe)
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
         }
 
-        // Cargar los datos al iniciar
-        window.onload = loadChartData;
+        // Función para calcular porcentajes (tu versión modificada)
+        function calculatePercentages(bars, poblacion) {
+            return bars.map(bar => ({
+                ...bar,
+                percentage: Number(((bar.value / poblacion) * 100).toFixed(2))
+            }));
+        }
+
+        // Cargar el JSON y generar el gráfico
+        async function loadAndRenderChart() {
+            try {
+                const response = await fetch('Educacion_Puericultura.json');
+                const data = await response.json();
+
+                // Calcular porcentajes
+                const barsWithPercentages = calculatePercentages(data.bars, data.poblacion);
+
+                // Configurar el gráfico con Chart.js
+                const ctx = document.getElementById('puericulturaChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: barsWithPercentages.map(bar => bar.name),
+                        datasets: [{
+                            label: 'Porcentaje (%)', // Cambiado para reflejar que son porcentajes
+                            data: barsWithPercentages.map(bar => bar.percentage), // Usar bar.percentage
+                            backgroundColor: barsWithPercentages.map(bar => bar.color),
+                            borderColor: barsWithPercentages.map(bar => bar.color),
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: data.chartTitle,
+                                color: '#fff',
+                                font: { size: 18 }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.raw}%`; // Mostrar el porcentaje en las etiquetas
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: data.xAxisLabel,
+                                    color: '#fff'
+                                },
+                                ticks: { color: '#fff' },
+                                grid: { color: data.gridColor }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Porcentaje (%)', // Cambiado para reflejar porcentajes
+                                    color: '#fff'
+                                },
+                                ticks: {
+                                    color: '#fff',
+                                    callback: function(value) {
+                                        return `${value}%`; // Agregar % en los ticks del eje Y
+                                    }
+                                },
+                                grid: { color: data.gridColor },
+                                beginAtZero: true
+                            }
+                        },
+                        backgroundColor: data.backgroundColor
+                    }
+                });
+
+                // Actualizar el contenedor
+                document.getElementById('chart-container').innerHTML = '';
+                document.getElementById('chart-container').appendChild(ctx.canvas);
+            } catch (error) {
+                console.error('Error al cargar el JSON o generar el gráfico:', error);
+            }
+        }
+
+        // Ejecutar al cargar la página
+        window.onload = loadAndRenderChart;
     </script>
 </body>
 </html>
