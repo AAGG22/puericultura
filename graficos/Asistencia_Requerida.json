@@ -6,12 +6,12 @@
   "bars": [
     {
       "name": "Requiere Asistencia",
-      "value": 1010,
+      "value": 706,
       "color": "#36A2EB"
     },
     {
       "name": "No Requiere Asistencia",
-      "value": 891,
+      "value": 942,
       "color": "#FF6384"
     }
   ],

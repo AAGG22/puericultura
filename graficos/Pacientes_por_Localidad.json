@@ -2,31 +2,36 @@
   "chartTitle": "Cantidad de Pacientes por Localidad",
   "xAxisLabel": "Localidad",
   "yAxisLabel": "Cantidad de Pacientes",
-  "barCount": 5,
+  "barCount": 6,
   "bars": [
     {
       "name": "San Luis",
-      "value": 1560,
+      "value": 1157,
       "color": "#36A2EB"
     },
     {
       "name": "Juana Koslay",
-      "value": 85,
+      "value": 43,
       "color": "#FF6384"
+    },
+        {
+      "name": "La Punta",
+      "value": 61,
+      "color": "#FFFF84"
     },
     {
       "name": "Villa de Merlo",
-      "value": 50,
+      "value": 6,
       "color": "#4BC0C0"
     },
     {
       "name": "Quines",
-      "value": 30,
+      "value": 65,
       "color": "#FFCE56"
     },
     {
       "name": "Otras",
-      "value": 176,
+      "value": 1469,
       "color": "#E7E9ED"
     }
   ],

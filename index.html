@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visualizador de Gráficos</title>
+    <title>Datos 01/2024 al 07/2025 (1904 Pacientes)</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
@@ -328,7 +328,7 @@
                                     const label = context.dataset.label || '';
                                     const value = context.raw;
                                     const percentage = percentages[context.dataIndex];
-                                    return `${label}: $${value} (${percentage}%)`;
+                                    return `${label}: ${value} (${percentage}%)`; // <-- Aquí estaba el $
                                 }
                             },
                             backgroundColor: tooltipBg,

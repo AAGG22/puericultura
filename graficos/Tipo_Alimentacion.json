@@ -1,18 +1,23 @@
 {
-  "chartTitle": "Tipo de Alimentación (Pecho Exclusivo vs. Lactancia Mixta)",
+  "chartTitle": "Tipo de Alimentación (Pecho Exclusivo, Lactancia Mixta, Leche de Fórmula)",
   "xAxisLabel": "Tipo de Alimentación",
   "yAxisLabel": "Cantidad de Bebés",
-  "barCount": 2,
+  "barCount": 3,
   "bars": [
     {
       "name": "Pecho Exclusivo",
-      "value": 1644,
+      "value": 1457,
       "color": "#36A2EB"
     },
     {
       "name": "Lactancia Mixta",
-      "value": 252,
+      "value": 162,
       "color": "#FF6384"
+    },
+    {
+      "name": "Leche de Fórmula",
+      "value": 15,
+      "color": "#FF1184"
     }
   ],
   "gridColor": "rgba(128, 128, 128, 0.2)",
