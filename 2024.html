@@ -278,9 +278,31 @@
           }
               */
         // Función para calcular porcentajes basada en la población
+        /* function calculatePercentages(bars, poblacion) {
+             return bars.map(bar => Number(((bar.value / poblacion) * 100).toFixed(2)));
+         }
+             */
+        // Función para calcular porcentajes basada en la población
         function calculatePercentages(bars, poblacion) {
-            return bars.map(bar => Number(((bar.value / poblacion) * 100).toFixed(2)));
+            // Validar que poblacion sea un número mayor que 0
+            if (!Number.isFinite(poblacion) || poblacion <= 0) {
+                console.error('Población inválida:', poblacion);
+                return bars.map(() => 0); // Devolver 0 para todas las barras si poblacion es inválida
+            }
+
+            return bars.map(bar => {
+                // Validar que bar.value sea un número
+                if (!Number.isFinite(bar.value)) {
+                    console.error('Valor inválido para barra:', bar);
+                    return 0;
+                }
+                return Number(((bar.value / poblacion) * 100).toFixed(2));
+            });
         }
+
+
+
+        //----------------------------------------------------
 
         // Función para cargar la lista de archivos JSON usando la API de GitHub
         async function loadGraphList() {
