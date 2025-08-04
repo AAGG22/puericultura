@@ -269,9 +269,11 @@
      */
 
         // Función para calcular porcentajes basada en la población
-        function calculatePercentages(values) {
-            const poblacion = values.poblacion;
-            return values.map(value => total > 0 ? Math.round((value / total) * 100) : 0);
+        function calculatePercentages(bars, poblacion) {
+            return bars.map(bar => ({
+                ...bar,
+                percentage: Number(((bar.value / poblacion) * 100).toFixed(2))
+            }));
         }
 
         // Función para cargar la lista de archivos JSON usando la API de GitHub
