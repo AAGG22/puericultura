@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+  <script type="module" src="./cargarGrafico.js"></script>
+  <style>
+    body {
+      background-color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      height: 100vh;
+      margin: 0;
+      padding-top: 20px;
+      color: #fff;
+      font-family: sans-serif;
+    }
+    #chart-container {
+      width: 70%;
+      max-width: 900px;
+      height: 500px;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    <!--select {
+      margin-bottom: 20px;
+      padding: 8px 12px;
+      font-size: 16px;
+      background-color: #222;
+      color: #fff;
+      border: 1px solid #555;
+      border-radius: 5px;
+      outline: none;
+      appearance: none;
+      cursor: pointer;
+    }-->
+
+select {
+  margin-bottom: 20px;
+  padding: 8px 40px 8px 12px; /* espacio a la derecha para la flecha */
+  font-size: 16px;
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 5px;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+    
+  </style>
+</head>
+<body>
+  <div style="display: flex; align-items: center; gap: 10px;">
+  <p>Seleccione un gráfico:</p>
+<select id="selectorGrafico"></select>
+  </div>
+  
+  <!--<div id="selectorGrafico"></div>-->
+<!--
+<select id="selectorGrafico">
+  <option value="Asistencia_Requerida.json">Asistencia Requerida por Pacientes</option>
+  <option value="Asistencia_y_Alimentacion.json">Relación entre Asistencia y Tipo de Alimentación</option>
+  <option value="Edad_Gestacional.json">Distribución por Edad Gestacional</option>
+  <option value="Lactancia_Mixta_por_Edad_Gestacional.json">Lactancia Mixta según Edad Gestacional</option>
+  <option value="Nacimientos_por_Tipo.json">Tipos de Nacimiento</option>
+  <option value="Pacientes_por_Localidad.json">Cantidad de Pacientes por Localidad</option>
+  <option value="Puericultura_Informacion.json">Información sobre Puericultura</option>
+  <option value="Reingresos_por_Localidad.json">Reingresos Hospitalarios por Localidad</option>
+  <option value="Tipo_Alimentacion.json">Distribución por Tipo de Alimentación</option>
+</select>
+-->
+
+  
+
+  <div id="chart-container">
+    <canvas id="myChart"></canvas>
+  </div>
+</body>
+</html>
