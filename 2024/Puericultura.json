@@ -2,6 +2,7 @@
   "chartTitle": "Binomios Capacitados por Tema de Puericultura",
   "xAxisLabel": "Categoría",
   "yAxisLabel": "Cantidad",
+  "poblacion": 1220,
   "barCount": 12,
   "bars": [
     {

@@ -2,6 +2,7 @@
   "chartTitle": "Tipo de Alimentación (Pecho Exclusivo, Lactancia Mixta, Leche de Fórmula)",
   "xAxisLabel": "Tipo de Alimentación",
   "yAxisLabel": "Cantidad de Bebés",
+  "poblacion": 1220,
   "barCount": 3,
   "bars": [
     {

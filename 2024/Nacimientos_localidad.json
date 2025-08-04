@@ -2,6 +2,7 @@
   "chartTitle": "Cantidad de Nacimientos por Localidad",
   "xAxisLabel": "Localidad",
   "yAxisLabel": "Cantidad de Nacimientos",
+  "poblacion": 1220,
   "barCount": 15,
   "bars": [
     {

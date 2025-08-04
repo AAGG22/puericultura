@@ -2,6 +2,7 @@
   "chartTitle": "Cantidad por Sector",
   "xAxisLabel": "Sector",
   "yAxisLabel": "Cantidad",
+  "poblacion": 1220,
   "barCount": 5,
   "bars": [
     {

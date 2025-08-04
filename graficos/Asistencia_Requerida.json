@@ -2,6 +2,7 @@
   "chartTitle": "Pacientes con Asistencia Requerida",
   "xAxisLabel": "Asistencia Requerida",
   "yAxisLabel": "Cantidad de Pacientes",
+  "poblacion": 1220,
   "barCount": 2,
   "bars": [
     {

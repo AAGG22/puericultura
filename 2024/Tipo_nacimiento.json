@@ -2,6 +2,7 @@
   "chartTitle": "Tipo de Nacimiento (Parto Natural vs Cesárea)",
   "xAxisLabel": "Tipo de Nacimiento",
   "yAxisLabel": "Cantidad",
+  "poblacion": 1220,
   "barCount": 2,
   "bars": [
     {
