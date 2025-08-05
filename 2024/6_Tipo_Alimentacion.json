@@ -8,7 +8,7 @@
     {
       "name": "Pecho Exclusivo",
       "value": 1087,
-      "color": "#36A2EB"
+      "color": "#FF1184"
     },
     {
       "name": "Lactancia Mixta",
@@ -18,7 +18,7 @@
     {
       "name": "Leche de Fórmula",
       "value": 15,
-      "color": "#FF1184"
+      "color": "#36A2EB"
     }
   ],
   "gridColor": "rgba(128, 128, 128, 0.2)",
