@@ -1,5 +1,5 @@
 {
-  "chartTitle": "Cantidad por Sector",
+  "chartTitle": "Sector de Consulta",
   "xAxisLabel": "Sector",
   "yAxisLabel": "Cantidad",
   "poblacion": 1220,
@@ -12,15 +12,10 @@
     },
     {
       "name": "RPM",
-      "value": 102,
+      "value": 106,
       "color": "#FF6384"
     },
-    {
-      "name": "RPM2",
-      "value": 4,
-      "color": "#FFFF84"
-    },
-    {
+     {
       "name": "SIC",
       "value": 1082,
       "color": "#4BC0C0"
@@ -29,6 +24,11 @@
       "name": "UTIGO",
       "value": 18,
       "color": "#FFCE56"
+    },
+       {
+      "name": "CExterna",
+      "value": 0,
+      "color": "#FF6384"
     }
   ],
   "gridColor": "rgba(128, 128, 128, 0.2)",
