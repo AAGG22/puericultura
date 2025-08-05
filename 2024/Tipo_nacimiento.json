@@ -1,12 +1,12 @@
 {
-  "chartTitle": "Tipo de Nacimiento (Parto Natural vs Cesárea)",
+  "chartTitle": "Finalización del Embarazo",
   "xAxisLabel": "Tipo de Nacimiento",
   "yAxisLabel": "Cantidad",
   "poblacion": 1220,
   "barCount": 2,
   "bars": [
     {
-      "name": "Cesárea",
+      "name": "Operación por Cesárea",
       "value": 637,
       "color": "#36A2EB"
     },
@@ -16,6 +16,6 @@
       "color": "#FF6384"
     }
   ],
-  "gridColor": "rgba(128, 128, 128, 0.2)",
+  "gridColor": "rgba(70, 130, 180, 0.2)",
   "backgroundColor": "#000000"
 }
