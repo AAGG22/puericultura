@@ -8,12 +8,12 @@
     {
       "name": "Operación por Cesárea",
       "value": 637,
-      "color": "#36A2EB"
+      "color": "#65FFFF"
     },
     {
       "name": "Parto Natural",
       "value": 565,
-      "color": "#FF6384"
+      "color": "#E591FF"
     }
   ],
   "gridColor": "rgba(70, 130, 180, 0.2)",

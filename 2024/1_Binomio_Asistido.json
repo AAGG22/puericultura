@@ -8,12 +8,12 @@
     {
       "name": "Binomio Asistido",
       "value": 677,
-      "color": "#36A2EB"
+      "color": "#B5DBB6"
     },
     {
       "name": "Requiere Asistencia",
       "value": 538,
-      "color": "#FF6384"
+      "color": "#B5DB2D"
     }
   ],
   "gridColor": "rgba(128, 128, 128, 0.2)",
