@@ -1,0 +1,21 @@
+{
+  "chartTitle": "Desglosar RA (EG - FOM)",
+  "xAxisLabel": "Asistencia",
+  "yAxisLabel": "Cantidad",
+  "poblacion": 1220,
+  "barCount": 2,
+  "bars": [
+    {
+      "name": "Total XX",
+      "value": 1000,
+      "color": "#F39C12"
+    },
+    {
+      "name": "Total ZZ",
+      "value": 90,
+      "color": "#FF6384"
+    }
+  ],
+  "gridColor": "rgba(128, 128, 128, 0.2)",
+  "backgroundColor": "#000000"
+}
