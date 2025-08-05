@@ -380,7 +380,8 @@
         function renderChart(graphData) {
             const ctx = document.getElementById('myChart').getContext('2d');
             const values = graphData.bars.map(bar => bar.value);
-            const percentages = calculatePercentages(values);
+            //const percentages = calculatePercentages(values);
+            const percentages = calculatePercentages(graphData.bars, graphData.poblacion);
 
             // Obtener colores del tema actual
             const textColor = getComputedStyle(document.documentElement).getPropertyValue('--chart-text');
