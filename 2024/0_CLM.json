@@ -2,12 +2,12 @@
   "chartTitle": "CLM",
   "xAxisLabel": "Asistencia",
   "yAxisLabel": "Cantidad",
-  "poblacion": 1220,
+  "poblacion": 550,
   "barCount": 2,
   "bars": [
     {
       "name": "Total de Asistencias",
-      "value": 1220,
+      "value": 550,
       "color": "#F39C12"
     },
     {

@@ -2,7 +2,7 @@
   "chartTitle": "Desglosar RA (EG - FOM)",
   "xAxisLabel": "Asistencia",
   "yAxisLabel": "Cantidad",
-  "poblacion": 1220,
+  "poblacion": 550,
   "barCount": 2,
   "bars": [
     {
