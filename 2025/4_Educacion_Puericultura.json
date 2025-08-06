@@ -1,5 +1,5 @@
 {
-  "chartTitle": "Binomios Capacitados por Tema de Puericultura",
+  "chartTitle": "Capacitados sobre Puericultura",
   "xAxisLabel": "Categoría",
   "yAxisLabel": "Cantidad",
   "poblacion": 512,
@@ -11,7 +11,7 @@
       "color": "#36A2EB"
     },
     {
-      "name": "Tiempo c/Succion",
+      "name": "Transición Láctea",
       "value": 494,
       "color": "#FF6384"
     },
@@ -36,12 +36,12 @@
       "color": "#E7FF00"
     },
     {
-      "name": "Extracción/Conservación LH",
+      "name": "Banco Leche Humana",
       "value": 450,
       "color": "#9966FF"
     },
     {
-      "name": "Señal de hambre",
+      "name": "Señales de hambre",
       "value": 494,
       "color": "#FF9F40"
     },
