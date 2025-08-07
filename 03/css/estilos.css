@@ -14,11 +14,14 @@
   }
 }
 
-/* Indicador de mano en todos los enlaces del menú */
+/* Cursor tipo mano en todos los enlaces del menú */
 [data-page] {
   cursor: pointer;
-}/* También para los subítems del menú desplegable */
-.list-group-item[data-page] {
-  cursor: pointer !important;
 }
 
+/* Efecto hover suave en subítems del menú */
+.list-group-item[data-page]:hover {
+  background-color: var(--bs-light) !important;
+  color: var(--bs-dark) !important;
+  transition: background-color 0.2s ease;
+}
