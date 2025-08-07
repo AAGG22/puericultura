@@ -12,10 +12,13 @@
     z-index: 1050;
     width: 100%;
   }
+}
 
 /* Indicador de mano en todos los enlaces del menú */
 [data-page] {
   cursor: pointer;
+}/* También para los subítems del menú desplegable */
+.list-group-item[data-page] {
+  cursor: pointer !important;
 }
 
-}
