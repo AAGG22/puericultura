@@ -204,8 +204,11 @@
 
     </div>
 
+
     <script>
-        // Variable global para almacenar la instancia del gráfico
+        (function () {
+        
+            // Variable global para almacenar la instancia del gráfico
         let myChart = null;
         let currentTheme = 'light';
 
@@ -510,7 +513,9 @@
 
         // Cargar la lista de gráficos al iniciar
         loadGraphList();
-    </script>
+    
+    })();
+        </script>
 </body>
 
 </html>
