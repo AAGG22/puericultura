@@ -1,15 +1,11 @@
 {
-  "chartTitle": "Binomios que requieren asistencia (RA)",
+  "chartTitle": "212 Binomios requirieron asistencia (RA)",
   "xAxisLabel": "Asistencia",
   "yAxisLabel": "Cantidad",
   "poblacion": 212,
-  "barCount": 2,
+  "barCount": 6,
   "bars": [
-    {
-      "name": "RA",
-      "value": 212,
-      "color": "#F39C12"
-    },
+
     {
       "name": "Femenino",
       "value": 107,
@@ -18,27 +14,27 @@
     {
       "name": "Masculino",
       "value": 105,
-      "color": "#FF6384"
+      "color": "#34AFE0"
     },
     {
       "name": "EG 34-36",
       "value": 13,
-      "color": "#FF6384"
+      "color": "#C4653A"
     },
     {
       "name": "EG 37",
       "value": 23,
-      "color": "#FF6384"
+      "color": "#C465AB"
     },
     {
       "name": "EG 38-41",
       "value": 156,
-      "color": "#FF6384"
+      "color": "#00FFFF"
     },
     {
       "name": "ALAS",
       "value": 212,
-      "color": "#FF6384"
+      "color": "#BCFF00"
     }
   ],
   "gridColor": "rgba(128, 128, 128, 0.2)",
