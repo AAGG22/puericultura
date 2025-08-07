@@ -1,0 +1,15 @@
+/* Sidebar fijo en escritorio */
+#sidebar-wrapper {
+  min-height: 100vh;
+  width: 240px;
+  transition: all 0.3s;
+}
+
+/* Ocultar en móvil por defecto */
+@media (max-width: 768px) {
+  #sidebar-wrapper {
+    position: absolute;
+    z-index: 1050;
+    width: 100%;
+  }
+}
