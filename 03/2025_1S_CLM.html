@@ -58,23 +58,20 @@
             --footer-text: #a0aec0;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            transition: background-color 0.3s, color 0.3s;
-        }
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
 
-        .container {
-            background-color: var(--container-bg);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s;
-        }
+  .container {
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 
         select {
             width: 100%;
@@ -88,9 +85,11 @@
             transition: all 0.3s;
         }
 
-        canvas {
-            margin-top: 20px;
-        }
+  /* Asegurar que el gráfico ocupe todo el ancho disponible */
+  canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
 
         h1 {
             text-align: center;
