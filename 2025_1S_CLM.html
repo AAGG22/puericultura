@@ -25,8 +25,7 @@
             --tooltip-bg: white;
             --tooltip-text: #333;
             --tooltip-border: #ddd;
-            --footer-bg: #f0f0f0;
-            --footer-text: #555;
+
         }
 
         [data-theme="dark"] {
@@ -53,9 +52,7 @@
             --tooltip-text: #ffffff;
             /* Texto blanco */
             --tooltip-border: #4a5568;
-            /* Borde oscuro */
-            --footer-bg: #2d3748;
-            --footer-text: #a0aec0;
+
         }
 
         body {
@@ -133,37 +130,7 @@
             margin-bottom: 20px;
         }
 
-        .footer {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: var(--footer-bg);
-            color: var(--footer-text);
-            border-radius: 8px;
-            font-size: 12px;
-            line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
-        }
 
-        .footer p {
-            margin: 5px 0;
-        }
-
-        .footer a {
-            color: var(--text-color);
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        .footer-copyright {
-            margin-top: 15px;
-            padding-top: 10px;
-            border-top: 1px solid var(--border-color);
-            font-size: 12px;
-            text-align: center;
-        }
     </style>
 </head>
 
@@ -181,18 +148,7 @@
         </select>
         <canvas id="myChart"></canvas>
 
-        <!-- Nuevo Footer -->
-        <div class="footer">
-            <p>Población: 550 pacientes | Metodología: Estadística descriptiva</p>
-            <div class="footer-copyright">
-                <p><strong>Dirección del Proyecto:</strong> Lic. Valeria Flores (<a
-                        href="mailto:vflores@gmail.com.ar">valerianoemiflores.vnf@gmail.com</a>) -
-                    <strong>Desarrollo web:</strong> Tec. Alfredo Galván (<a
-                        href="mailto:alfredodgalvan@gmail.com.ar">alfredodgalvan@gmail.com</a>)
-                </p>
-                © 2025 Valeria Flores & Alfredo Galván. Todos los derechos reservados.
-            </div>
-        </div>
+
 
 
 
