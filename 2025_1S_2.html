@@ -25,34 +25,6 @@
             --tooltip-bg: white;
             --tooltip-text: #333;
             --tooltip-border: #ddd;
-
-        }
-
-        [data-theme="dark"] {
-            --bg-color: #1a202c;
-            --text-color: #ffffff;
-            /* Blanco desde el inicio */
-            --container-bg: #2d3748;
-            --border-color: #4a5568;
-            --error-bg: #742a2a;
-            --error-text: #fed7d7;
-            --select-bg: #2d3748;
-            --select-text: #ffffff;
-            /* Blanco desde el inicio */
-            --loading-color: #a0aec0;
-            --percentage-color: #ffffff;
-            /* Blanco puro */
-            --button-bg: #e2e8f0;
-            --button-text: #2d3748;
-            --chart-text: #ffffff;
-            /* Blanco desde el inicio */
-            --axis-color: #a0aec0;
-            --tooltip-bg: #2d3748;
-            /* Fondo oscuro para tooltips */
-            --tooltip-text: #ffffff;
-            /* Texto blanco */
-            --tooltip-border: #4a5568;
-
         }
 
         body {
@@ -62,7 +34,6 @@
             padding: 20px;
             background-color: var(--bg-color);
             color: var(--text-color);
-            transition: background-color 0.3s, color 0.3s;
         }
 
         .container {
@@ -70,7 +41,6 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s;
         }
 
         select {
@@ -82,7 +52,6 @@
             font-size: 16px;
             background-color: var(--select-bg);
             color: var(--select-text);
-            transition: all 0.3s;
         }
 
         canvas {
@@ -108,32 +77,9 @@
             font-style: italic;
         }
 
-        .theme-switcher {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
-
-        .theme-btn {
-            background-color: var(--button-bg);
-            color: var(--button-text);
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .theme-btn:hover {
-            opacity: 0.9;
-        }
-
         .header {
-            position: relative;
             margin-bottom: 20px;
         }
-
     </style>
 </head>
 
@@ -142,7 +88,6 @@
         <div class="header">
             <h1>Sala de Internación Conjunta</h1>
             <p align="center">Año 2025 1°Semestre (muestra de 550 pacientes)</p>
-
         </div>
 
         <div id="errorMessage" class="error-message"></div>
@@ -150,44 +95,11 @@
             <option value="" class="loading">Cargando gráficos...</option>
         </select>
         <canvas id="myChart"></canvas>
-
-   
-
-
-
-
     </div>
 
     <script>
         // Variable global para almacenar la instancia del gráfico
         let myChart = null;
-        let currentTheme = 'light';
-
-
-        // Función para actualizar colores del gráfico según el tema
-        function updateChartColors() {
-            if (!myChart) return;
-
-            const textColor = getComputedStyle(document.documentElement).getPropertyValue('--chart-text');
-            const axisColor = getComputedStyle(document.documentElement).getPropertyValue('--axis-color');
-            const percentageColor = getComputedStyle(document.documentElement).getPropertyValue('--percentage-color');
-            const tooltipBg = getComputedStyle(document.documentElement).getPropertyValue('--tooltip-bg');
-            const tooltipText = getComputedStyle(document.documentElement).getPropertyValue('--tooltip-text');
-            const tooltipBorder = getComputedStyle(document.documentElement).getPropertyValue('--tooltip-border');
-
-            // Actualizar opciones del gráfico
-            myChart.options.plugins.title.color = textColor;
-            myChart.options.scales.x.ticks.color = axisColor;
-            myChart.options.scales.y.ticks.color = axisColor;
-            myChart.options.scales.x.title.color = textColor;
-            myChart.options.scales.y.title.color = textColor;
-
-            // Actualizar tooltips
-            myChart.options.plugins.tooltip.backgroundColor = tooltipBg;
-            myChart.options.plugins.tooltip.bodyColor = tooltipText;
-            myChart.options.plugins.tooltip.titleColor = tooltipText;
-            myChart.options.plugins.tooltip.borderColor = tooltipBorder;
-        }
 
         // Función para mostrar errores al usuario
         function showError(message) {
@@ -201,26 +113,6 @@
             document.getElementById('errorMessage').style.display = 'none';
         }
 
-        // Función para calcular porcentajes
-        /*   function calculatePercentages(values) {
-               const total = values.reduce((sum, value) => sum + value, 0);
-               return values.map(value => total > 0 ? Math.round((value / total) * 100) : 0);
-           }
-        */
-
-        // Función para calcular porcentajes basada en la población
-        /*  function calculatePercentages(bars, poblacion) {
-              return bars.map(bar => ({
-                  ...bar,
-                  percentage: Number(((bar.value / poblacion) * 100).toFixed(2))
-              }));
-          }
-              */
-        // Función para calcular porcentajes basada en la población
-        /* function calculatePercentages(bars, poblacion) {
-             return bars.map(bar => Number(((bar.value / poblacion) * 100).toFixed(2)));
-         }
-             */
         // Función para calcular porcentajes basada en la población
         function calculatePercentages(bars, poblacion) {
             // Validar que poblacion sea un número mayor que 0
@@ -238,10 +130,6 @@
                 return Number(((bar.value / poblacion) * 100).toFixed(2));
             });
         }
-
-
-
-        //----------------------------------------------------
 
         // Función para cargar la lista de archivos JSON usando la API de GitHub
         async function loadGraphList() {
@@ -319,7 +207,6 @@
         function renderChart(graphData) {
             const ctx = document.getElementById('myChart').getContext('2d');
             const values = graphData.bars.map(bar => bar.value);
-            //const percentages = calculatePercentages(values);
             const percentages = calculatePercentages(graphData.bars, graphData.poblacion);
 
             // Obtener colores del tema actual
@@ -367,7 +254,7 @@
                                     const label = context.dataset.label || '';
                                     const value = context.raw;
                                     const percentage = percentages[context.dataIndex];
-                                    return `${label}: ${value} (${percentage}%)`; // <-- Aquí estaba el $
+                                    return `${label}: ${value} (${percentage}%)`;
                                 }
                             },
                             backgroundColor: tooltipBg,
@@ -422,7 +309,7 @@
                         ctx.fillStyle = percentageColor;
 
                         data.datasets.forEach(dataset => {
-                            dataset.data.forEach((value, index) => {
+                            dataset.data.forEach((value, index) {
                                 const percentage = percentages[index];
                                 const xPos = x.getPixelForValue(index);
                                 const yPos = y.getPixelForValue(value) - 5;
@@ -441,12 +328,6 @@
                 loadGraph(this.value);
             }
         });
-
-        // Event listener para el botón de tema
-        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-
-        // Inicializar con modo claro
-        document.documentElement.setAttribute('data-theme', 'light');
 
         // Cargar la lista de gráficos al iniciar
         loadGraphList();
