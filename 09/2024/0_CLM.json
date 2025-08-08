@@ -1,0 +1,21 @@
+{
+  "chartTitle": "CLM",
+  "xAxisLabel": "Asistencia",
+  "yAxisLabel": "Cantidad",
+  "poblacion": 550,
+  "barCount": 2,
+  "bars": [
+    {
+      "name": "Total de Asistencias",
+      "value": 550,
+      "color": "#F39C12"
+    },
+    {
+      "name": "Total de leche extraída",
+      "value": 0,
+      "color": "#FF6384"
+    }
+  ],
+  "gridColor": "rgba(128, 128, 128, 0.2)",
+  "backgroundColor": "#000000"
+}

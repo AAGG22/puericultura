@@ -1,0 +1,71 @@
+{
+  "chartTitle": "Capacitados sobre Puericultura",
+  "xAxisLabel": "Categoría",
+  "yAxisLabel": "Cantidad",
+  "poblacion": 512,
+  "barCount": 12,
+  "bars": [
+    {
+      "name": "Beneficios",
+      "value": 494,
+      "color": "#36A2EB"
+    },
+    {
+      "name": "Transición Láctea",
+      "value": 494,
+      "color": "#FF6384"
+    },
+    {
+      "name": "Frecuencia Alimentacion",
+      "value": 494,
+      "color": "#FFFF84"
+    },
+    {
+      "name": "Regla de Oro",
+      "value": 494,
+      "color": "#4BC0C0"
+    },
+    {
+      "name": "Tec.Prendida de pecho",
+      "value": 494,
+      "color": "#FFCE56"
+    },
+    {
+      "name": "ALAS",
+      "value": 212,
+      "color": "#E7FF00"
+    },
+    {
+      "name": "Banco Leche Humana",
+      "value": 450,
+      "color": "#9966FF"
+    },
+    {
+      "name": "Señales de hambre",
+      "value": 494,
+      "color": "#FF9F40"
+    },
+    {
+      "name": "Signos Saciedad",
+      "value": 495,
+      "color": "#66CCCC"
+    },
+    {
+      "name": "Lavado de Manos",
+      "value": 495,
+      "color": "#FF6666"
+    },
+    {
+      "name": "Prevencion BQL",
+      "value": 495,
+      "color": "#99CC99"
+    },
+    {
+      "name": "Envio Info Wapp",
+      "value": 495,
+      "color": "#CC99CC"
+    }
+  ],
+  "gridColor": "rgba(128, 128, 128, 0.2)",
+  "backgroundColor": "#000000"
+}

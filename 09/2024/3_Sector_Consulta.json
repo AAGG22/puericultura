@@ -1,0 +1,36 @@
+{
+  "chartTitle": "Sector de Consulta",
+  "xAxisLabel": "Sector",
+  "yAxisLabel": "Cantidad",
+  "poblacion": 1220,
+  "barCount": 5,
+  "bars": [
+    {
+      "name": "NEO",
+      "value": 14,
+      "color": "#E5916C"
+    },
+    {
+      "name": "RPM",
+      "value": 106,
+      "color": "#FF6384"
+    },
+     {
+      "name": "SIC",
+      "value": 1082,
+      "color": "#9B59B6"
+    },
+    {
+      "name": "UTIGO",
+      "value": 18,
+      "color": "#FFCE56"
+    },
+       {
+      "name": "CExterna",
+      "value": 0,
+      "color": "#FF6384"
+    }
+  ],
+  "gridColor": "rgba(128, 128, 128, 0.2)",
+  "backgroundColor": "#000000"
+}

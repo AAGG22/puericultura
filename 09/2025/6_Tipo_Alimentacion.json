@@ -1,0 +1,31 @@
+{
+  "chartTitle": "Tipo de Alimentación",
+  "xAxisLabel": "Tipo de Alimentación",
+  "yAxisLabel": "Cantidad",
+  "poblacion": 550,
+  "barCount": 4,
+  "bars": [
+    {
+      "name": "Pecho Exclusivo",
+      "value": 436,
+      "color": "#FF1184"
+    },
+    {
+      "name": "Lactancia Mixta",
+      "value": 60,
+      "color": "#75FF00"
+    },
+    {
+      "name": "Leche de Fórmula",
+      "value": 1,
+      "color": "#36A2EB"
+    },
+      {
+      "name": "Lactancia Suspendida",
+      "value": 0,
+      "color": "#FF6F10"
+    }
+  ],
+  "gridColor": "rgba(128, 128, 128, 0.2)",
+  "backgroundColor": "#000000"
+}

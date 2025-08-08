@@ -1,0 +1,21 @@
+{
+  "chartTitle": "Finalización del Embarazo",
+  "xAxisLabel": "Tipo de Nacimiento",
+  "yAxisLabel": "Cantidad",
+  "poblacion": 1220,
+  "barCount": 2,
+  "bars": [
+    {
+      "name": "Operación por Cesárea",
+      "value": 637,
+      "color": "#65FFFF"
+    },
+    {
+      "name": "Parto Natural",
+      "value": 565,
+      "color": "#E591FF"
+    }
+  ],
+  "gridColor": "rgba(70, 130, 180, 0.2)",
+  "backgroundColor": "#000000"
+}

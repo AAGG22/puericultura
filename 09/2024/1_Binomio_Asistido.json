@@ -1,0 +1,21 @@
+{
+  "chartTitle": "Binomio Asistido",
+  "xAxisLabel": "Asistencia",
+  "yAxisLabel": "Cantidad",
+  "poblacion": 1220,
+  "barCount": 2,
+  "bars": [
+    {
+      "name": "Binomio Asistido",
+      "value": 677,
+      "color": "#B5DBB6"
+    },
+    {
+      "name": "Requiere Asistencia",
+      "value": 538,
+      "color": "#B5DB2D"
+    }
+  ],
+  "gridColor": "rgba(128, 128, 128, 0.2)",
+  "backgroundColor": "#000000"
+}

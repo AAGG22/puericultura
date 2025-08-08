@@ -1,0 +1,21 @@
+{
+  "chartTitle": "Binomios Asistidos",
+  "xAxisLabel": "Asistencia",
+  "yAxisLabel": "Cantidad",
+  "poblacion": 550,
+  "barCount": 2,
+  "bars": [
+    {
+      "name": "No requiere Asistencia",
+      "value": 285,
+      "color": "#B5DBB6"
+    },
+    {
+      "name": "Si requiere Asistencia",
+      "value": 212,
+      "color": "#B5DB2D"
+    }
+  ],
+  "gridColor": "rgba(128, 128, 128, 0.2)",
+  "backgroundColor": "#000000"
+}
