@@ -309,14 +309,15 @@
                         ctx.fillStyle = percentageColor;
 
                         data.datasets.forEach(dataset => {
-                            dataset.data.forEach((value, index) {
-                                const percentage = percentages[index];
-                                const xPos = x.getPixelForValue(index);
-                                const yPos = y.getPixelForValue(value) - 5;
+  dataset.data.forEach((value, index) => {
+    const percentage = percentages[index];
+    const xPos = x.getPixelForValue(index);
+    const yPos = y.getPixelForValue(value) - 5;
 
-                                ctx.fillText(`${percentage}%`, xPos, yPos);
-                            });
-                        });
+    ctx.fillText(`${percentage}%`, xPos, yPos);
+  });
+});
+
                     }
                 }]
             });
