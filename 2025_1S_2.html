@@ -18,8 +18,6 @@
             --select-text: #333;
             --loading-color: #666;
             --percentage-color: #666;
-            --button-bg: #4a5568;
-            --button-text: white;
             --chart-text: #666;
             --axis-color: #666;
             --tooltip-bg: white;
@@ -173,7 +171,9 @@
                 selector.disabled = false;
 
                 // Cargar el primer gráfico automáticamente
-                loadGraph(jsonFiles[0].download_url);
+                if (jsonFiles.length > 0) {
+                    loadGraph(jsonFiles[0].download_url);
+                }
 
             } catch (error) {
                 console.error('Error al cargar la lista de gráficos:', error);
@@ -274,7 +274,7 @@
                                 color: textColor
                             },
                             grid: {
-                                color: graphData.gridColor || 'var(--border-color)',
+                                color: 'rgba(0, 0, 0, 0.1)',
                                 display: false
                             },
                             ticks: {
@@ -288,7 +288,7 @@
                                 color: textColor
                             },
                             grid: {
-                                color: graphData.gridColor || 'var(--border-color)'
+                                color: 'rgba(0, 0, 0, 0.1)'
                             },
                             ticks: {
                                 color: axisColor
@@ -296,7 +296,7 @@
                             beginAtZero: true
                         }
                     },
-                    backgroundColor: graphData.backgroundColor || 'transparent'
+                    backgroundColor: 'transparent'
                 },
                 plugins: [{
                     id: 'showPercentages',
