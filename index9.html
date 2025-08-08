@@ -80,7 +80,7 @@
     <!-- Script para manejar la carga dinámica -->
     <script>
         // Función para cargar contenido con fetch
-        async function cargarContenido(archivo) {
+      /*  async function cargarContenido(archivo) {
             try {
                 const response = await fetch(archivo);
                 if (!response.ok) throw new Error("Error al cargar el archivo");
@@ -95,8 +95,32 @@
                 document.getElementById('contenido').innerHTML = `<p class="text-danger">Error al cargar ${archivo}</p>`;
             }
         }
+*/
+        
+async function cargarContenido(archivo) {
+  try {
+    const response = await fetch(archivo);
+    if (!response.ok) throw new Error("Error al cargar el archivo");
+    const html = await response.text();
+    document.getElementById('contenido').innerHTML = html;
 
-        // Cargar inicial.html al abrir la página
+    // Cierra el offcanvas solo si existe
+    const offcanvasElement = document.getElementById('offcanvasNavbar');
+    if (offcanvasElement) {
+      const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+      if (offcanvas) offcanvas.hide(); // Verifica que la instancia exista
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    document.getElementById('contenido').innerHTML = `
+      <div class="alert alert-danger">Error al cargar ${archivo}</div>
+    `;
+  }
+}
+
+
+
+// Cargar inicial.html al abrir la página
         document.addEventListener('DOMContentLoaded', () => {
             cargarContenido('https://raw.githubusercontent.com/AAGG22/puericultura/main/inicial.html');
         });
