@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2025 CLM – Centro de Lactancia Materna</title>
 
   <!-- Chart.js CDN -->
@@ -15,17 +16,20 @@
       --text-color: #333;
       --container-bg: white;
     }
+
     [data-theme="dark"] {
       --bg-color: #1a202c;
       --text-color: #ffffff;
       --container-bg: #2d3748;
     }
+
     body {
       margin: 0;
       padding: 0;
       background: var(--bg-color);
       color: var(--text-color);
     }
+
     .container {
       max-width: none;
       width: 100%;
@@ -33,10 +37,20 @@
       padding: 0;
     }
 
+    canvas {
+      width: 100%;
+      max-width: 800px;   /* Ancho máximo para que no sea demasiado grande */
+      height: 400px;      /* Altura fija para un tamaño mediano */
+      margin: 0 auto;     /* Centrar el gráfico */
+      /*width: 100% !important;
+      height: auto !important;*/
+    }
+
     /* Cursor y hover en subítems */
     [data-page] {
       cursor: pointer;
     }
+
     .list-group-item[data-page]:hover {
       background-color: var(--bs-light) !important;
       color: var(--bs-dark) !important;
@@ -44,6 +58,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <h1 style="text-align:center; margin:0; padding:10px 0;">
@@ -53,14 +68,17 @@
       Año 2025 1°Semestre (muestra de 550 pacientes)
     </p>
 
-    <div id="errorMessage" style="display:none; color:#d32f2f; background:#fde0e0; padding:10px; border-radius:4px; margin-bottom:15px;"></div>
+    <div id="errorMessage"
+      style="display:none; color:#d32f2f; background:#fde0e0; padding:10px; border-radius:4px; margin-bottom:15px;">
+    </div>
 
     <select id="graphSelector" style="width:100%; padding:8px; margin-bottom:15px;">
       <option value="" class="loading">Cargando gráficos…</option>
     </select>
 
     <!-- Canvas con altura fija reducida -->
-    <canvas id="myChart" height="250"></canvas>
+
+    <canvas id="myChart"></canvas>
 
     <div class="footer" style="margin-top:20px; padding:15px; background:#f0f0f0; font-size:12px; text-align:center;">
       <p>Población: 550 pacientes | Metodología: Estadística descriptiva</p>
@@ -212,4 +230,5 @@
     })();
   </script>
 </body>
+
 </html>
