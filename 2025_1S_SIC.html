@@ -256,26 +256,7 @@
             document.getElementById('errorMessage').style.display = 'none';
         }
 
-        // Función para calcular porcentajes
-        /*   function calculatePercentages(values) {
-               const total = values.reduce((sum, value) => sum + value, 0);
-               return values.map(value => total > 0 ? Math.round((value / total) * 100) : 0);
-           }
-        */
 
-        // Función para calcular porcentajes basada en la población
-        /*  function calculatePercentages(bars, poblacion) {
-              return bars.map(bar => ({
-                  ...bar,
-                  percentage: Number(((bar.value / poblacion) * 100).toFixed(2))
-              }));
-          }
-              */
-        // Función para calcular porcentajes basada en la población
-        /* function calculatePercentages(bars, poblacion) {
-             return bars.map(bar => Number(((bar.value / poblacion) * 100).toFixed(2)));
-         }
-             */
         // Función para calcular porcentajes basada en la población
         function calculatePercentages(bars, poblacion) {
             // Validar que poblacion sea un número mayor que 0
