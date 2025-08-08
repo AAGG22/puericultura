@@ -1,234 +1,117 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2025 CLM – Centro de Lactancia Materna</title>
-
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <!-- Estilos compactos para que el gráfico ocupe menos altura -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centro de Lactancia Materna (CLM)</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
-    :root {
-      --bg-color: #f5f5f5;
-      --text-color: #333;
-      --container-bg: white;
-    }
-
-    [data-theme="dark"] {
-      --bg-color: #1a202c;
-      --text-color: #ffffff;
-      --container-bg: #2d3748;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg-color);
-      color: var(--text-color);
-    }
-
-    .container {
-      max-width: none;
+    .chart-container {
       width: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-    canvas {
-      width: 100%;
-      max-width: 800px;   /* Ancho máximo para que no sea demasiado grande */
-      height: 400px;      /* Altura fija para un tamaño mediano */
-      margin: 0 auto;     /* Centrar el gráfico */
-      /*width: 100% !important;
-      height: auto !important;*/
-    }
-
-    /* Cursor y hover en subítems */
-    [data-page] {
-      cursor: pointer;
-    }
-
-    .list-group-item[data-page]:hover {
-      background-color: var(--bs-light) !important;
-      color: var(--bs-dark) !important;
-      transition: background-color 0.2s ease;
+      max-width: 800px; /* Ancho máximo para un tamaño mediano */
+      height: 400px; /* Altura fija para evitar que se alargue */
+      margin: 0 auto; /* Centrar el gráfico */
     }
   </style>
 </head>
-
 <body>
-  <div class="container">
-    <h1 style="text-align:center; margin:0; padding:10px 0;">
-      Centro de Lactancia Materna (CLM)
-    </h1>
-    <p style="text-align:center; margin:0 0 15px 0;">
-      Año 2025 1°Semestre (muestra de 550 pacientes)
-    </p>
+  <h1>Centro de Lactancia Materna (CLM)</h1>
+  <h2>Año 2025 1°Semestre (muestra de 550 pacientes)</h2>
 
-    <div id="errorMessage"
-      style="display:none; color:#d32f2f; background:#fde0e0; padding:10px; border-radius:4px; margin-bottom:15px;">
-    </div>
-
-    <select id="graphSelector" style="width:100%; padding:8px; margin-bottom:15px;">
-      <option value="" class="loading">Cargando gráficos…</option>
-    </select>
-
-    <!-- Canvas con altura fija reducida -->
-
+  <div class="chart-container">
     <canvas id="myChart"></canvas>
-
-    <div class="footer" style="margin-top:20px; padding:15px; background:#f0f0f0; font-size:12px; text-align:center;">
-      <p>Población: 550 pacientes | Metodología: Estadística descriptiva</p>
-      <p>
-        <strong>Dirección del Proyecto:</strong> Lic. Valeria Flores
-        (<a href="mailto:valerianoemiflores.vnf@gmail.com">valerianoemiflores.vnf@gmail.com</a>) –
-        <strong>Desarrollo web:</strong> Tec. Alfredo Galván
-        (<a href="mailto:alfredodgalvan@gmail.com">alfredodgalvan@gmail.com</a>)
-      </p>
-      © 2025 Valeria Flores & Alfredo Galván. Todos los derechos reservados.
-    </div>
   </div>
 
+  <p><strong>Población:</strong> 550 pacientes | <strong>Metodología:</strong> Estadística descriptiva</p>
+  <p>
+    <strong>Dirección del Proyecto:</strong> Lic. Valeria Flores (<a href="mailto:valerianoemiflores.vnf@gmail.com">valerianoemiflores.vnf@gmail.com</a>) –
+    <strong>Desarrollo web:</strong> Tec. Alfredo Galván (<a href="mailto:alfredodgalvan@gmail.com">alfredodgalvan@gmail.com</a>)
+  </p>
+  <p>© 2025 Valeria Flores & Alfredo Galván. Todos los derechos reservados.</p>
+
   <script>
-    /* ======  CÓDIGO AISLADO PARA EVITAR CONFLICTOS  ====== */
-    (function () {
-      let myChart = null;
-      let currentTheme = 'light';
-
-      // Cache simple para no repetir fetch
-      const cache = {};
-
-      // Funciones auxiliares
-      function showError(msg) {
-        const el = document.getElementById('errorMessage');
-        el.textContent = msg;
-        el.style.display = 'block';
-      }
-      function hideError() {
-        document.getElementById('errorMessage').style.display = 'none';
-      }
-      function calculatePercentages(bars, poblacion) {
-        return bars.map(bar => {
-          if (!Number.isFinite(bar.value) || !Number.isFinite(poblacion) || poblacion <= 0) return 0;
-          return Number(((bar.value / poblacion) * 100).toFixed(2));
-        });
-      }
-
-      // URLs usando jsDelivr (sin límites)
-      const apiUrl = 'https://api.github.com/repos/AAGG22/puericultura/contents/2025clm';
-      const cdnBase = 'https://cdn.jsdelivr.net/gh/AAGG22/puericultura@main/2025clm/';
-
-      // Cargar lista de gráficos
-      async function loadGraphList() {
-        try {
-          hideError();
-          const sel = document.getElementById('graphSelector');
-          sel.disabled = true;
-          sel.innerHTML = '<option value="" class="loading">Cargando gráficos…</option>';
-
-          const res = await fetch(apiUrl);
-          if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
-          const files = await res.json();
-
-          sel.innerHTML = '<option value="">Selecciona un gráfico…</option>';
-          const jsonFiles = files
-            .filter(f => f.name.endsWith('.json') && f.type === 'file')
-            .sort((a, b) => a.name.localeCompare(b.name));
-
-          jsonFiles.forEach(f => {
-            const opt = document.createElement('option');
-            opt.value = cdnBase + f.name;
-            opt.textContent = f.name.replace('.json', '');
-            sel.appendChild(opt);
-          });
-
-          sel.disabled = false;
-          if (jsonFiles.length) loadGraph(cdnBase + jsonFiles[0].name);
-        } catch (err) {
-          showError(`Error al cargar los gráficos: ${err.message}`);
-          document.getElementById('graphSelector').innerHTML = '<option value="">Error al cargar</option>';
-        }
-      }
-
-      // Cargar y renderizar gráfico
-      async function loadGraph(url) {
-        try {
-          hideError();
-          document.getElementById('myChart').style.display = 'none';
-
-          const data = cache[url] || await (await fetch(url)).json();
-          cache[url] = data;
-          renderChart(data);
-          document.getElementById('myChart').style.display = 'block';
-        } catch (err) {
-          showError(`Error al cargar el gráfico: ${err.message}`);
-        }
-      }
-
-      // Renderizar con Chart.js
-      function renderChart(graphData) {
-        const ctx = document.getElementById('myChart').getContext('2d');
-        const values = graphData.bars.map(b => b.value);
-        const percentages = calculatePercentages(graphData.bars, graphData.poblacion);
-
-        if (myChart) myChart.destroy();
-
-        myChart = new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: graphData.bars.map(b => b.name),
-            datasets: [{
-              label: graphData.yAxisLabel,
-              data: values,
-              backgroundColor: graphData.bars.map(b => b.color),
-              borderWidth: 1
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false, // <-- respeta altura fija
-            plugins: {
-              title: { display: true, text: graphData.chartTitle, font: { size: 16 } },
-              legend: { display: false },
-              tooltip: {
-                callbacks: {
-                  label: ctx => `${ctx.dataset.label}: ${ctx.raw} (${percentages[ctx.dataIndex]}%)`
-                }
-              }
-            },
-            scales: {
-              x: { title: { display: true, text: graphData.xAxisLabel } },
-              y: { title: { display: true, text: graphData.yAxisLabel }, beginAtZero: true }
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+        datasets: [{
+          label: 'Consultas CLM 2025 (1° Semestre)',
+          data: [90, 110, 85, 120, 95, 50],
+          backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'],
+          borderColor: ['#2A80B9', '#CC5068', '#CCAB45', '#3A9A9A', '#7A52CC', '#CC7F32'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // Ajusta el gráfico al contenedor
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Número de Pacientes'
             }
           },
-          plugins: [{
-            id: 'showPercentages',
-            afterDatasetsDraw(chart) {
-              const { ctx, data, scales: { x, y } } = chart;
-              ctx.font = 'bold 11px Arial';
-              ctx.textAlign = 'center';
-              ctx.textBaseline = 'bottom';
-              ctx.fillStyle = '#333';
-              data.datasets[0].data.forEach((v, i) => {
-                ctx.fillText(`${percentages[i]}%`, x.getPixelForValue(i), y.getPixelForValue(v) - 4);
-              });
+          x: {
+            title: {
+              display: true,
+              text: 'Meses'
             }
-          }]
-        });
+          }
+        },
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top'
+          },
+          title: {
+            display: true,
+            text: 'Consultas en Centro de Lactancia Materna (2025, 1° Semestre)'
+          }
+        }
       }
-
-      // Eventos
-      document.getElementById('graphSelector').addEventListener('change', e => {
-        if (e.target.value) loadGraph(e.target.value);
-      });
-
-      // Inicio
-      loadGraphList();
-    })();
+    });
   </script>
 </body>
-
 </html>
