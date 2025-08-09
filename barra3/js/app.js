@@ -4,15 +4,15 @@ Chart.register(ChartDataLabels);
 // Datos para S.I.C. 2024
 const datosGraficos = {
     grafico1: {
-        labels: ["Enero", "Febrero", "Marzo", "Abril"],
+        labels: ["No Requiere Asistencia", "Requiere asistencia"],
         valores: [285, 212],
         titulo: "Binomios Asistidos",
         colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
     },
         grafico2: {
-        labels: ["Mayo", "Junio", "Julio", "Agosto"],
-        valores: [700, 100, 245, 500],
-        titulo: "S.I.C. 2024 - Ventas Mensuales",
+        labels: ["Operación por Cesárea", "Parto Natural"],
+        valores: [251, 238],
+        titulo: "Finalización de embarazos",
         colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
     }
 };
