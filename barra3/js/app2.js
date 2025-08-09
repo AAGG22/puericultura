@@ -2,16 +2,10 @@ Chart.register(ChartDataLabels);
 
 const datosGraficos = {
     grafico1: {
-        labels: ["Enero", "Febrero", "Marzo", "Abril"],
-        valores: [200, 400, 300, 500],
-        titulo: "Ventas por Mes (2024)",
+        labels: ["Femenino", "Masculino","EG 34-36", "EG 37", "38-41"],
+        valores: [107, 105, 13, 23, 156],
+        titulo: "212 Binomios que Requieren Asistencia",
         colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
-    },
-    grafico2: {
-        labels: ["Norte", "Sur", "Este", "Oeste"],
-        valores: [150, 300, 450, 100],
-        titulo: "Distribución por Región (2024)",
-        colores: ['#9966FF', '#00CC99', '#FF9933', '#FF6699']
     }
 };
 
@@ -42,7 +36,7 @@ function renderizarGrafico(idGrafico) {
                 datalabels: {
                     anchor: 'end',
                     align: 'top',
-                    formatter: (value) => `${(value/1000*100).toFixed(1)}%`,
+                    formatter: (value) => `${(value/212*100).toFixed(1)}%`,
                     font: { weight: 'bold' }
                 },
                 legend: { display: false },
