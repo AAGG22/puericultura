@@ -7,25 +7,35 @@ const poblacion = 1000; // Ejemplo: 1000 personas
 // Datos de todos los gráficos (fácil de escalar)
 const datosGraficos = {
     grafico1: {
-        labels: ["Enero", "Febrero", "Marzo", "Abril"],
-        valores: [200, 400, 300, 500],
-        titulo: "Ventas por Mes (2024)",
-        colores: [  // Colores personalizados para cada barra (RGBA o HEX)
-            'rgba(255, 99, 132, 0.6)',  // Rojo
-            'rgba(54, 162, 235, 0.6)',  // Azul
-            'rgba(255, 206, 86, 0.6)',  // Amarillo
-            'rgba(75, 192, 192, 0.6)'   // Verde
-        ]
+        labels: ["No Requiere Asistencia", "Requiere asistencia"],
+        valores: [285, 212],
+        titulo: "Binomios Asistidos",
+        colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
     },
     grafico2: {
-        labels: ["Norte", "Sur", "Este", "Oeste"],
-        valores: [150, 300, 450, 100],
-        titulo: "Distribución por Región",
-        colores: [  // Colores en hexadecimal
-            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'
-        ]
+        labels: ["Operación por Cesárea", "Parto Natural"],
+        valores: [251, 238],
+        titulo: "Finalización de embarazos",
+        colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+    },
+    grafico3: {
+        labels: ["NEO", "RPM", "SIC", "UTIGO", "C.Externa"],
+        valores: [6, 79, 416, 6, 0],
+        titulo: "Sector de Consulta",
+        colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+    },
+    grafico4: {
+        labels: ["Beneficios", "Transición Láctea", "Frecuencia Alimentación", "Regla de Oro", "Tec. Prendida de pecho", "Banco Leche", "ALAS Humana", "Señales de hambre", "Lavado de Manos", "Prevención BOL", "Envío Info Wapp"],
+        valores: [494, 494, 494, 494, 494, 212, 450, 494, 495, 495, 495, 495],
+        titulo: "Capacitación en Puericultura",
+        colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+    },
+    grafico5: {
+        labels: ["Pecho Exclusivo", "Lactancia Mixta", "Leche de Fórmula", "Lactancia Suspendida"],
+        valores: [436, 60, 1, 0],
+        titulo: "Sector de Consulta",
+        colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
     }
-    // Añadir más gráficos con sus colores...
 };
 
 // Función para calcular porcentajes
