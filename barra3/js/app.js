@@ -1,22 +1,20 @@
+// Registrar plugins
 Chart.register(ChartDataLabels);
 
-// Datos específicos para S.I.C. 2024
+// Datos para S.I.C. 2024
 const datosGraficos = {
     grafico1: {
         labels: ["Enero", "Febrero", "Marzo", "Abril"],
         valores: [200, 400, 300, 500],
         titulo: "S.I.C. 2024 - Ventas Mensuales",
         colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
-    },
-    grafico2: {
-        labels: ["Q1", "Q2", "Q3", "Q4"],
-        valores: [600, 300, 450, 800],
-        titulo: "S.I.C. 2024 - Ventas Trimestrales",
-        colores: ['#9966FF', '#00CC99', '#FF9933', '#FF6699']
     }
 };
 
-// Llenar el select con opciones
+// Variables globales
+let miGrafico = null;
+
+// Llenar select
 function actualizarSelect() {
     const select = document.getElementById('selectorGraficos');
     select.innerHTML = '';
@@ -29,14 +27,17 @@ function actualizarSelect() {
     });
 }
 
-//let miGrafico;
-
+// Renderizar gráfico
 function renderizarGrafico(idGrafico) {
     const datos = datosGraficos[idGrafico];
     if (!datos) return;
 
     const ctx = document.getElementById('miGrafico').getContext('2d');
-    if (miGrafico) miGrafico.destroy();
+    
+    // Destruir gráfico anterior
+    if (miGrafico) {
+        miGrafico.destroy();
+    }
 
     miGrafico = new Chart(ctx, {
         type: 'bar',
@@ -46,7 +47,7 @@ function renderizarGrafico(idGrafico) {
                 label: datos.titulo,
                 data: datos.valores,
                 backgroundColor: datos.colores,
-                borderColor: datos.colores.map(color => color.replace('0.6', '1')),
+                borderColor: datos.colores.map(c => c.includes('rgba') ? c.replace('0.6', '1') : c),
                 borderWidth: 1
             }]
         },
@@ -56,27 +57,18 @@ function renderizarGrafico(idGrafico) {
                 datalabels: {
                     anchor: 'end',
                     align: 'top',
-                    formatter: (value) => `${(value/1000*100).toFixed(1)}%`,
+                    formatter: (v) => `${(v/1000*100).toFixed(1)}%`,
                     font: { weight: 'bold' }
-                },
-                legend: { display: false },
-                title: {
-                    display: true,
-                    text: datos.titulo,
-                    font: { size: 16 }
                 }
             },
             scales: {
-                y: {
-                    beginAtZero: true,
-                    title: { display: true, text: 'Valores absolutos' }
-                }
+                y: { beginAtZero: true }
             }
         }
     });
 }
 
-// Eventos
+// Inicialización
 document.addEventListener('DOMContentLoaded', () => {
     actualizarSelect();
     renderizarGrafico('grafico1');
@@ -86,5 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Inicializar
-renderizarGrafico('grafico1');
+// Forzar redibujado al cambiar tamaño
+window.addEventListener('resize', () => {
+    if (miGrafico) {
+        miGrafico.resize();
+    }
+});
