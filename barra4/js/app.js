@@ -5,18 +5,36 @@ Chart.register(ChartDataLabels);
 const poblacion = 1000; // Ejemplo: 1000 personas
 
 // Datos de todos los gráficos (fácil de escalar)
-const datosGraficos = {
-    grafico1: {
-        labels: ["Enero", "Febrero", "Marzo", "Abril"],
-        valores: [200, 400, 300, 500], // Valores absolutos
-        titulo: "Ventas por Mes (2024)"
+grafico1: {
+        labels: ["No Requiere Asistencia", "Requiere asistencia"],
+        valores: [285, 212],
+        titulo: "Binomios Asistidos",
+        colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
     },
     grafico2: {
-        labels: ["Norte", "Sur", "Este", "Oeste"],
-        valores: [150, 300, 450, 100],
-        titulo: "Distribución por Región"
+        labels: ["Operación por Cesárea", "Parto Natural"],
+        valores: [251, 238],
+        titulo: "Finalización de embarazos",
+        colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+    },
+    grafico3: {
+        labels: ["NEO", "RPM", "SIC", "UTIGO", "C.Externa"],
+        valores: [6, 79, 416, 6, 0],
+        titulo: "Sector de Consulta",
+        colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+    },
+    grafico4: {
+        labels: ["Beneficios", "Transición Láctea", "Frecuencia Alimentación", "Regla de Oro", "Tec. Prendida de pecho", "Banco Leche", "ALAS Humana", "Señales de hambre", "Lavado de Manos", "Prevención BOL", "Envío Info Wapp"],
+        valores: [494, 494, 494, 494, 494, 212, 450, 494, 495, 495, 495, 495],
+        titulo: "Capacitación en Puericultura",
+        colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+    },
+    grafico5: {
+        labels: ["Pecho Exclusivo", "Lactancia Mixta", "Leche de Fórmula", "Lactancia Suspendida"],
+        valores: [436, 60, 1, 0],
+        titulo: "Sector de Consulta",
+        colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
     }
-    // Añadir más gráficos aquí...
 };
 
 // Función para calcular porcentajes
