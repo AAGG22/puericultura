@@ -8,7 +8,7 @@ const datosGraficos = {
         valores: [200, 400, 300, 500],
         titulo: "S.I.C. 2024 - Ventas Mensuales",
         colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
-    }
+    },
         grafico2: {
         labels: ["Mayo", "Junio", "Julio", "Agosto"],
         valores: [700, 100, 245, 500],
@@ -24,7 +24,7 @@ let miGrafico = null;
 function actualizarSelect() {
     const select = document.getElementById('selectorGraficos');
     select.innerHTML = '';
-    
+
     Object.keys(datosGraficos).forEach(key => {
         const option = document.createElement('option');
         option.value = key;
@@ -39,7 +39,7 @@ function renderizarGrafico(idGrafico) {
     if (!datos) return;
 
     const ctx = document.getElementById('miGrafico').getContext('2d');
-    
+
     // Destruir gráfico anterior
     if (miGrafico) {
         miGrafico.destroy();
@@ -63,7 +63,7 @@ function renderizarGrafico(idGrafico) {
                 datalabels: {
                     anchor: 'end',
                     align: 'top',
-                    formatter: (v) => `${(v/1000*100).toFixed(1)}%`,
+                    formatter: (v) => `${(v / 1000 * 100).toFixed(1)}%`,
                     font: { weight: 'bold' }
                 }
             },
@@ -78,7 +78,7 @@ function renderizarGrafico(idGrafico) {
 document.addEventListener('DOMContentLoaded', () => {
     actualizarSelect();
     renderizarGrafico('grafico1');
-    
+
     document.getElementById('selectorGraficos').addEventListener('change', (e) => {
         renderizarGrafico(e.target.value);
     });
