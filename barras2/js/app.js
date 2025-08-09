@@ -1,25 +1,7 @@
-// Datos de todos los gráficos y el equipo
 const datosGraficos = {
-    grafico1: {
-        labels: ["Enero", "Febrero", "Marzo", "Abril"],
-        valores: [200, 400, 300, 500],
-        titulo: "S.I.C. 2024",
-        colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
-    },
-    grafico2: {
-        labels: ["Norte", "Sur", "Este", "Oeste"],
-        valores: [150, 300, 450, 100],
-        titulo: "C.L.M. 2024",
-        colores: ['#9966FF', '#00CC99', '#FF9933', '#FF6699']
-    },
-    grafico3: {
-        labels: ["Q1", "Q2", "Q3", "Q4"],
-        valores: [600, 300, 200, 700],
-        titulo: "S.I.C. 2025",
-        colores: ['#FF5733', '#33FF57', '#3357FF', '#F333FF']
-    },
+    // ... (otros gráficos)
     grafico4: {
-        tipo: "equipo",
+        tipo: "equipo", // ¡Esta línea es clave!
         titulo: "Equipo de Desarrollo",
         equipo: [
             {
@@ -40,23 +22,13 @@ const datosGraficos = {
     }
 };
 
-// Configuración global de Chart.js
-Chart.register(ChartDataLabels);
-let miGrafico = null;
-
-// Función para calcular porcentajes
-function calcularPorcentajes(valores, poblacion = 1000) {
-    return valores.map(valor => ((valor / poblacion) * 100).toFixed(1) + "%");
-}
-
-// Función para renderizar contenido dinámico
 function renderizarGrafico(idGrafico) {
     const datos = datosGraficos[idGrafico];
-    if (!datos) return; // Prevención de errores
-
     const ctx = document.getElementById('miGrafico');
     const tituloGrafico = document.getElementById('titulo-grafico');
-    
+
+    if (!datos) return; // Si no existen datos, salir
+
     // Limpiar contenedor
     ctx.innerHTML = '';
     tituloGrafico.textContent = datos.titulo;
@@ -64,10 +36,9 @@ function renderizarGrafico(idGrafico) {
     // Destruir gráfico anterior si existe
     if (miGrafico) {
         miGrafico.destroy();
-        miGrafico = null;
     }
 
-    // Caso especial: Equipo de desarrollo
+    // Renderizar equipo (si es tipo "equipo")
     if (datos.tipo === "equipo") {
         ctx.innerHTML = `
             <div class="card border-0 shadow-sm">
@@ -102,66 +73,12 @@ function renderizarGrafico(idGrafico) {
                 </div>
             </div>
         `;
-        return;
+        return; // ¡Importante: Salir de la función después de renderizar el equipo!
     }
 
-    // Caso normal: Gráficos
+    // Renderizar gráfico (si no es equipo)
     const chartCtx = ctx.getContext('2d');
-    const porcentajes = calcularPorcentajes(datos.valores);
-
     miGrafico = new Chart(chartCtx, {
-        type: 'bar',
-        data: {
-            labels: datos.labels,
-            datasets: [{
-                label: datos.titulo,
-                data: datos.valores,
-                backgroundColor: datos.colores,
-                borderColor: datos.colores.map(color => color.includes('rgba') ? color.replace('0.6', '1') : color),
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                datalabels: {
-                    anchor: 'end',
-                    align: 'top',
-                    formatter: (value) => calcularPorcentajes([value])[0],
-                    font: { weight: 'bold' }
-                },
-                legend: { display: false },
-                title: {
-                    display: true,
-                    text: datos.titulo,
-                    font: { size: 16 }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: { display: true, text: 'Valores absolutos' }
-                }
-            }
-        }
+        // ... (configuración del gráfico)
     });
 }
-
-// Eventos del sidebar
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.sidebar a[data-grafico]').forEach(enlace => {
-        enlace.addEventListener('click', (e) => {
-            e.preventDefault();
-            const graficoId = e.target.closest('a').getAttribute('data-grafico');
-            renderizarGrafico(graficoId);
-            
-            // Marcar como activo
-            document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
-            e.target.closest('a').classList.add('active');
-        });
-    });
-
-    // Cargar primer gráfico por defecto
-    const primerGrafico = Object.keys(datosGraficos)[0];
-    renderizarGrafico(primerGrafico);
-});
