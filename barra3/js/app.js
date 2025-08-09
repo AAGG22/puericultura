@@ -1,4 +1,7 @@
-// app.js (S.I.C. 2024)
+// app.js - Estructura modular
+import Chart from 'chart.js/auto';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+
 Chart.register(ChartDataLabels);
 
 const datosGraficos = {
@@ -10,22 +13,37 @@ const datosGraficos = {
     }
 };
 
-let miGrafico = null;
-
-function actualizarSelect() {
+export function init() {
+    // Limpiar select
     const select = document.getElementById('selectorGraficos');
-    select.innerHTML = Object.entries(datosGraficos).map(([key, value]) => 
-        `<option value="${key}">${value.titulo}</option>`
-    ).join('');
+    select.innerHTML = '';
+    
+    // Llenar select
+    Object.entries(datosGraficos).forEach(([key, value]) => {
+        const option = document.createElement('option');
+        option.value = key;
+        option.textContent = value.titulo;
+        select.appendChild(option);
+    });
+    
+    // Renderizar primer gráfico
+    renderizarGrafico('grafico1');
+    
+    // Event listener
+    select.addEventListener('change', (e) => {
+        renderizarGrafico(e.target.value);
+    });
 }
 
 function renderizarGrafico(idGrafico) {
-    if (miGrafico) miGrafico.destroy();
-    
     const datos = datosGraficos[idGrafico];
     const ctx = document.getElementById('miGrafico').getContext('2d');
     
-    miGrafico = new Chart(ctx, {
+    if (window.currentChart) {
+        window.currentChart.destroy();
+    }
+    
+    window.currentChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: datos.labels,
@@ -33,12 +51,13 @@ function renderizarGrafico(idGrafico) {
                 label: datos.titulo,
                 data: datos.valores,
                 backgroundColor: datos.colores,
-                borderColor: datos.colores.map(c => c.replace('0.6', '1')),
+                borderColor: datos.colores.map(c => c.includes('rgba') ? c.replace('0.6', '1') : c),
                 borderWidth: 1
             }]
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
                 datalabels: {
                     anchor: 'end',
@@ -50,11 +69,3 @@ function renderizarGrafico(idGrafico) {
         }
     });
 }
-
-// Inicialización
-actualizarSelect();
-renderizarGrafico('grafico1');
-
-document.getElementById('selectorGraficos').addEventListener('change', (e) => {
-    renderizarGrafico(e.target.value);
-});

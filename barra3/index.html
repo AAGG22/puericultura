@@ -28,12 +28,14 @@
                     <div class="collapse show" id="collapse2024">
                         <ul class="nav flex-column ms-4">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#" data-js="app.js" id="sic-2024">
+                                <!--<a class="nav-link active" href="#" data-js="app.js" id="sic-2024">-->
+                                    <a class="nav-link" href="#" data-module="app">C.L.M.</a>
                                     <i class="fas fa-chart-bar me-2"></i> S.I.C.
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-js="app2.js" id="clm-2024">
+                                <!--<a class="nav-link" href="#" data-js="app2.js" id="clm-2024">-->
+                                    <a class="nav-link" href="#" data-module="app2">C.L.M.</a>
                                     <i class="fas fa-chart-pie me-2"></i> C.L.M.
                                 </a>
                             </li>
@@ -106,37 +108,41 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-// Función para cargar JS dinámicamente
-function loadJS(archivo) {
-    // 1. Eliminar scripts anteriores
-    const oldScript = document.querySelector('script[data-dynamic]');
-    if (oldScript) oldScript.remove();
-    
-    // 2. Limpiar canvas
-    const canvas = document.getElementById('miGrafico');
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // 3. Cargar nuevo script
-    const script = document.createElement('script');
-    script.src = `./js/${archivo}`;  // Nota: añadí ./ antes de js/
-    script.setAttribute('data-dynamic', 'true');
-    document.body.appendChild(script);
+// Función mejorada para cargar scripts
+async function loadModule(moduleName) {
+    try {
+        // 1. Limpiar estado anterior
+        if (window.currentChart) {
+            window.currentChart.destroy();
+            document.getElementById('miGrafico').width = '100%';
+        }
+
+        // 2. Cargar módulo
+        const module = await import(`./js/${moduleName}.js`);
+        
+        // 3. Inicializar
+        module.init();
+    } catch (error) {
+        console.error(`Error cargando ${moduleName}:`, error);
+    }
 }
 
-// Eventos del sidebar
-document.querySelectorAll('.sidebar a[data-js]').forEach(enlace => {
-    enlace.addEventListener('click', (e) => {
-        e.preventDefault();
-        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-        e.target.classList.add('active');
-        loadJS(e.target.getAttribute('data-js'));
+// Manejadores de eventos
+document.addEventListener('DOMContentLoaded', () => {
+    // Cargar S.I.C. 2024 por defecto
+    loadModule('app');
+    
+    // Configurar eventos del sidebar
+    document.querySelectorAll('[data-module]').forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            e.target.classList.add('active');
+            loadModule(e.target.dataset.module);
+        });
     });
-});
-
-// Cargar app.js por defecto
-window.addEventListener('DOMContentLoaded', () => {
-    loadJS('app.js');
 });
 </script>
 
