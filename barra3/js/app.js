@@ -5,8 +5,8 @@ Chart.register(ChartDataLabels);
 const datosGraficos = {
     grafico1: {
         labels: ["Enero", "Febrero", "Marzo", "Abril"],
-        valores: [200, 400, 300, 500],
-        titulo: "S.I.C. 2024 - Ventas Mensuales",
+        valores: [285, 212],
+        titulo: "Binomios Asistidos",
         colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
     },
         grafico2: {
@@ -63,7 +63,7 @@ function renderizarGrafico(idGrafico) {
                 datalabels: {
                     anchor: 'end',
                     align: 'top',
-                    formatter: (v) => `${(v / 1000 * 100).toFixed(1)}%`,
+                    formatter: (v) => `${(v / 550 * 100).toFixed(1)}%`,
                     font: { weight: 'bold' }
                 }
             },
