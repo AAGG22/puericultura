@@ -6,8 +6,8 @@ Chart.register(ChartDataLabels);
 
 const datosGraficos = {
     grafico1: {
-        labels: ["xxxx, "Febrero", "Marzo", "Abril"],
-        valores: [100, 40, 130, 500],
+        labels: ["Enero", "Febrero", "Marzo", "Abril"],
+        valores: [200, 400, 300, 500],
         titulo: "S.I.C. 2024 - Ventas Mensuales",
         colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
     }
