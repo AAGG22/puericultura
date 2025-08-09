@@ -1,21 +1,35 @@
 Chart.register(ChartDataLabels);
 
+// Datos específicos para S.I.C. 2024
 const datosGraficos = {
     grafico1: {
         labels: ["Enero", "Febrero", "Marzo", "Abril"],
         valores: [200, 400, 300, 500],
-        titulo: "Ventas por Mes (2024)",
+        titulo: "S.I.C. 2024 - Ventas Mensuales",
         colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
     },
     grafico2: {
-        labels: ["Norte", "Sur", "Este", "Oeste"],
-        valores: [150, 300, 450, 100],
-        titulo: "Distribución por Región (2024)",
+        labels: ["Q1", "Q2", "Q3", "Q4"],
+        valores: [600, 300, 450, 800],
+        titulo: "S.I.C. 2024 - Ventas Trimestrales",
         colores: ['#9966FF', '#00CC99', '#FF9933', '#FF6699']
     }
 };
 
-let miGrafico;
+// Llenar el select con opciones
+function actualizarSelect() {
+    const select = document.getElementById('selectorGraficos');
+    select.innerHTML = '';
+    
+    Object.keys(datosGraficos).forEach(key => {
+        const option = document.createElement('option');
+        option.value = key;
+        option.textContent = datosGraficos[key].titulo;
+        select.appendChild(option);
+    });
+}
+
+//let miGrafico;
 
 function renderizarGrafico(idGrafico) {
     const datos = datosGraficos[idGrafico];
@@ -63,8 +77,13 @@ function renderizarGrafico(idGrafico) {
 }
 
 // Eventos
-document.getElementById('selectorGraficos').addEventListener('change', (e) => {
-    renderizarGrafico(e.target.value);
+document.addEventListener('DOMContentLoaded', () => {
+    actualizarSelect();
+    renderizarGrafico('grafico1');
+    
+    document.getElementById('selectorGraficos').addEventListener('change', (e) => {
+        renderizarGrafico(e.target.value);
+    });
 });
 
 // Inicializar

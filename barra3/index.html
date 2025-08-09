@@ -94,25 +94,31 @@
     <script src="js/app.js"></script>
     
     <!-- Controlador de navegación -->
-    <script>
-        // Manejar clics en los subitems
-        document.querySelectorAll('.sidebar a[data-js]').forEach(enlace => {
-            enlace.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                // Remover activo de todos los items
-                document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-                
-                // Marcar como activo
-                e.target.classList.add('active');
-                
-                // Cargar el JS correspondiente
-                const jsFile = e.target.getAttribute('data-js');
-                const script = document.createElement('script');
-                script.src = `js/${jsFile}`;
-                document.body.appendChild(script);
-            });
+<script>
+    // Función para cargar dinámicamente JS
+    function cargarJS(archivo) {
+        // Eliminar scripts anteriores
+        document.querySelectorAll('script[data-dynamic]').forEach(script => script.remove());
+        
+        // Cargar nuevo script
+        const script = document.createElement('script');
+        script.src = `js/${archivo}`;
+        script.setAttribute('data-dynamic', 'true');
+        document.body.appendChild(script);
+    }
+
+    // Manejar clics en el sidebar
+    document.querySelectorAll('.sidebar a[data-js]').forEach(enlace => {
+        enlace.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            e.target.classList.add('active');
+            cargarJS(e.target.getAttribute('data-js'));
         });
-    </script>
+    });
+
+    // Cargar S.I.C. 2024 por defecto
+    cargarJS('app.js');
+</script>
 </body>
 </html>
