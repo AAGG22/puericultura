@@ -9,6 +9,12 @@ const datosGraficos = {
         titulo: "S.I.C. 2024 - Ventas Mensuales",
         colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
     }
+        grafico2: {
+        labels: ["Mayo", "Junio", "Julio", "Agosto"],
+        valores: [700, 100, 245, 500],
+        titulo: "S.I.C. 2024 - Ventas Mensuales",
+        colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+    }
 };
 
 // Variables globales
