@@ -3,7 +3,7 @@
         "chart1": {
             "title": "Ocupación de Camas - Sala de Internación Conjunta",
             "population": 100,
-            "labels": ["Ocupadas", "Libres", "Mantenimiento"],
+            "labels": ["xOcupadas24", "xLibres", "xMantenimiento"],
             "values": [75, 20, 5],
             "colors": ["#dc3545", "#198754", "#ffc107"]
         },
@@ -19,7 +19,7 @@
         "chart1": {
             "title": "Ocupación de Camas - Sala de Internación Conjunta",
             "population": 110,
-            "labels": ["Ocupadas", "Libres", "Mantenimiento"],
+            "labels": ["Ocupadas25", "Libres", "Mantenimiento"],
             "values": [85, 20, 5],
             "colors": ["#dc3545", "#198754", "#ffc107"]
         },
