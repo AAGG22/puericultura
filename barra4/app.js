@@ -91,7 +91,7 @@ function renderizarGrafico(idGrafico) {
 }
 
 // Evento al cambiar el select
-document.getElementById('selectorGraficos').addEventListener('change', (e) => {
+document.getElementById('miGrafico').addEventListener('change', (e) => {
     renderizarGrafico(e.target.value);
 });
 
