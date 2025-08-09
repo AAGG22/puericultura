@@ -27,3 +27,23 @@
     background: #f8f9fa;
     min-height: 100vh;
 }
+/* Estilos para la tarjeta de equipo */
+.card-equipo {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.team-member-img {
+    border: 3px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.text-muted a {
+    color: #6c757d;
+    transition: color 0.3s;
+}
+
+.text-muted a:hover {
+    color: #0d6efd;
+}
