@@ -1,41 +1,30 @@
-// Registrar plugins (¡ESTO ES ESENCIAL!)
+// app.js (S.I.C. 2024)
 Chart.register(ChartDataLabels);
 
-// Datos para C.L.M. 2024
 const datosGraficos = {
     grafico1: {
-        labels: ["Norte", "Sur", "Este", "Oeste"],
-        valores: [150, 300, 450, 100],
-        titulo: "C.L.M. 2024 - Distribución Regional",
-        colores: ['#8A2BE2', '#20B2AA', '#FF4500', '#4682B4']
+        labels: ["Enero", "Febrero", "Marzo", "Abril"],
+        valores: [200, 400, 300, 500],
+        titulo: "S.I.C. 2024 - Ventas Mensuales",
+        colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
     }
 };
 
-// Variables globales
 let miGrafico = null;
 
-// Llenar select
 function actualizarSelect() {
     const select = document.getElementById('selectorGraficos');
-    select.innerHTML = '';
-    
-    Object.keys(datosGraficos).forEach(key => {
-        const option = document.createElement('option');
-        option.value = key;
-        option.textContent = datosGraficos[key].titulo;
-        select.appendChild(option);
-    });
+    select.innerHTML = Object.entries(datosGraficos).map(([key, value]) => 
+        `<option value="${key}">${value.titulo}</option>`
+    ).join('');
 }
 
-// Renderizar gráfico
 function renderizarGrafico(idGrafico) {
+    if (miGrafico) miGrafico.destroy();
+    
     const datos = datosGraficos[idGrafico];
-    if (!datos) return;
-
     const ctx = document.getElementById('miGrafico').getContext('2d');
     
-    if (miGrafico) miGrafico.destroy();
-
     miGrafico = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -44,7 +33,7 @@ function renderizarGrafico(idGrafico) {
                 label: datos.titulo,
                 data: datos.valores,
                 backgroundColor: datos.colores,
-                borderColor: datos.colores.map(c => c.includes('rgba') ? c.replace('0.6', '1') : c),
+                borderColor: datos.colores.map(c => c.replace('0.6', '1')),
                 borderWidth: 1
             }]
         },
@@ -57,20 +46,15 @@ function renderizarGrafico(idGrafico) {
                     formatter: (v) => `${(v/1000*100).toFixed(1)}%`,
                     font: { weight: 'bold' }
                 }
-            },
-            scales: {
-                y: { beginAtZero: true }
             }
         }
     });
 }
 
-// Inicialización (¡IMPORTANTE!)
-document.addEventListener('DOMContentLoaded', () => {
-    actualizarSelect();
-    renderizarGrafico('grafico1');
-    
-    document.getElementById('selectorGraficos').addEventListener('change', (e) => {
-        renderizarGrafico(e.target.value);
-    });
+// Inicialización
+actualizarSelect();
+renderizarGrafico('grafico1');
+
+document.getElementById('selectorGraficos').addEventListener('change', (e) => {
+    renderizarGrafico(e.target.value);
 });
