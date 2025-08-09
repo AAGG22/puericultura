@@ -14,7 +14,19 @@ const datosGraficos = {
         valores: [251, 238],
         titulo: "Finalización de embarazos",
         colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
-    }
+    },
+        grafico3: {
+        labels: ["NEO", "RPM", "SIC", "UTIGO", "C.Externa"],
+        valores: [6, 79, 416, 6, 0],
+        titulo: "Sector de Consulta",
+        colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+    },
+    grafico4: {
+        labels: ["Beneficios", "Transición Láctea", "Frecuencia Alimentación", "Regla de Oro", "Tec. Prendida de pecho", "Banco Leche", "ALAS Humana", "Señales de hambre", "Lavado de Manos", "Prevención BOL", "Envío Info Wapp"],
+        valores: [494, 494, 494, 494, 494, 212, 450 , 494, 495, 495, 495, 495],
+        titulo: "Capacitación en Puericultura",
+        colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+    },
 };
 
 // Variables globales
