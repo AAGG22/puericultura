@@ -33,7 +33,7 @@ const datosGraficos = {
     grafico5: {
         labels: ["Pecho Exclusivo", "Lactancia Mixta", "Leche de Fórmula", "Lactancia Suspendida"],
         valores: [436, 60, 1, 0],
-        titulo: "Sector de Consulta",
+        titulo: "Tipo de Lactancia xx",
         colores: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
     }
 };
