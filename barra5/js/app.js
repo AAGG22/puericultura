@@ -13,6 +13,7 @@ class HospitalDashboard {
             await this.dataManager.loadData(this.currentYear);
             this.setupEventListeners();
             this.populateChartSelector();
+            this.showMainSection(); // Asegurar que se muestre el contenido principal
             this.renderChart();
         } catch (error) {
             console.error('Error inicializando la aplicación:', error);
@@ -29,11 +30,15 @@ class HospitalDashboard {
         document.querySelectorAll('[data-year]').forEach(link => {
             link.addEventListener('click', async (e) => {
                 e.preventDefault();
-                this.currentYear = e.target.getAttribute('data-year');
+                this.currentYear = e.currentTarget.getAttribute('data-year');
+                
+                // Mostrar sección principal
+                this.showMainSection();
+                
                 await this.dataManager.loadData(this.currentYear);
                 this.populateChartSelector();
                 this.renderChart();
-                this.updateActiveLink(e.target);
+                this.updateActiveLink(e.currentTarget);
             });
         });
 
@@ -41,13 +46,18 @@ class HospitalDashboard {
         document.querySelector('[data-section="desarrollo"]').addEventListener('click', (e) => {
             e.preventDefault();
             this.showDesarrolloSection();
-            this.updateActiveLink(e.target);
+            this.updateActiveLink(e.currentTarget);
         });
 
         // Selector de gráficos
         document.getElementById('chartSelector').addEventListener('change', () => {
             this.renderChart();
         });
+    }
+
+    showMainSection() {
+        document.getElementById('mainContent').style.display = 'block';
+        document.getElementById('desarrolloContent').style.display = 'none';
     }
 
     populateChartSelector() {
@@ -89,10 +99,10 @@ class HospitalDashboard {
 
         // Calcular porcentajes
         const percentages = chartData.values.map(value => 
-            this.dataManager.calculatePercentage(value, chartData.population)
+            parseFloat(this.dataManager.calculatePercentage(value, chartData.population))
         );
 
-        // Crear nuevo gráfico
+        // Crear nuevo gráfico con porcentajes
         this.chart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -102,7 +112,7 @@ class HospitalDashboard {
                     data: percentages,
                     backgroundColor: chartData.colors,
                     borderColor: chartData.colors,
-                    borderWidth: 1
+                    borderWidth: 2
                 }]
             },
             options: {
@@ -120,6 +130,13 @@ class HospitalDashboard {
                                 return `${context.label}: ${value} (${percentage}%)`;
                             }
                         }
+                    },
+                    datalabels: {
+                        display: true,
+                        color: '#000',
+                        anchor: 'end',
+                        align: 'top',
+                        formatter: (value) => value + '%'
                     }
                 },
                 scales: {
@@ -133,13 +150,30 @@ class HospitalDashboard {
                         }
                     }
                 }
-            }
+            },
+            plugins: [{
+                afterDraw: function(chart) {
+                    var ctx = chart.ctx;
+                    ctx.save();
+                    ctx.font = 'bold 12px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+                    
+                    chart.data.datasets.forEach((dataset, i) => {
+                        chart.getDatasetMeta(i).data.forEach((bar, index) => {
+                            var data = dataset.data[index] + '%';
+                            ctx.fillText(data, bar.x, bar.y - 5);
+                        });
+                    });
+                    ctx.restore();
+                }
+            }]
         });
 
         // Actualizar título e información
         document.getElementById('chartTitle').textContent = chartData.title;
         document.getElementById('chartInfo').textContent = 
-            `Población total: ${chartData.population} pacientes`;
+            `Población total: ${chartData.population} pacientes | Año: ${this.currentYear}`;
     }
 
     showDesarrolloSection() {
@@ -148,10 +182,13 @@ class HospitalDashboard {
     }
 
     updateActiveLink(activeLink) {
+        // Remover active de todos
         document.querySelectorAll('.list-group-item').forEach(link => {
             link.classList.remove('active');
         });
-        activeLink.classList.add('active', 'bg-light', 'text-primary');
+        
+        // Agregar active al actual
+        activeLink.classList.add('active');
     }
 }
 

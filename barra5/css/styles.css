@@ -85,3 +85,19 @@ body.sb-sidenav-toggled #sidebar-wrapper {
 ::-webkit-scrollbar-thumb:hover {
     background: #0b5ed7;
 }
+/* Solución colores menú */
+.list-group-item.active {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    border-color: transparent !important;
+    color: white !important;
+}
+
+.list-group-item:not(.active):hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Mostrar porcentajes en barras */
+.chart-container {
+    position: relative;
+    height: 400px;
+}
