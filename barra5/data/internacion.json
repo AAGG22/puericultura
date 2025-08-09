@@ -17,18 +17,18 @@
     },
     "2025": {
         "chart1": {
-            "title": "Ocupación de Camas - Sala de Internación Conjunta",
-            "population": 110,
-            "labels": ["Ocupadas25", "Libres", "Mantenimiento"],
-            "values": [85, 20, 5],
-            "colors": ["#dc3545", "#198754", "#ffc107"]
+            "title": "Sala de Internación Conjunta: Binomios asistidos",
+            "population": 550,
+            "labels": ["No requiere asistencia", "Si requiere asistencia"],
+            "values": [285, 212],
+            "colors": ["#dc3545", "#198754"]
         },
         "chart2": {
-            "title": "Tipo de Pacientes - Sala de Internación Conjunta",
-            "population": 220,
-            "labels": ["Quirúrgicos", "Médicos", "Pediatría", "Neonatos"],
-            "values": [90, 70, 45, 15],
-            "colors": ["#0d6efd", "#6f42c1", "#d63384", "#fd7e14"]
+            "title": "Sala de Internación Conjunta: Finalización de Embarazo",
+            "population": 550,
+            "labels": ["Operación por cesárea", "Parto natural"],
+            "values": [251, 238],
+            "colors": ["#0d6efd", "#6f42c1"]
         }
     }
 }
