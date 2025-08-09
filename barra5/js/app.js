@@ -1,0 +1,161 @@
+class HospitalDashboard {
+    constructor() {
+        this.dataManager = new DataManager();
+        this.chart = null;
+        this.currentSection = 'internacion';
+        this.currentYear = '2024';
+        
+        this.init();
+    }
+
+    async init() {
+        try {
+            await this.dataManager.loadData(this.currentYear);
+            this.setupEventListeners();
+            this.populateChartSelector();
+            this.renderChart();
+        } catch (error) {
+            console.error('Error inicializando la aplicación:', error);
+        }
+    }
+
+    setupEventListeners() {
+        // Toggle sidebar
+        document.getElementById('sidebarToggle').addEventListener('click', () => {
+            document.body.classList.toggle('sb-sidenav-toggled');
+        });
+
+        // Navegación por año
+        document.querySelectorAll('[data-year]').forEach(link => {
+            link.addEventListener('click', async (e) => {
+                e.preventDefault();
+                this.currentYear = e.target.getAttribute('data-year');
+                await this.dataManager.loadData(this.currentYear);
+                this.populateChartSelector();
+                this.renderChart();
+                this.updateActiveLink(e.target);
+            });
+        });
+
+        // Sección desarrollo
+        document.querySelector('[data-section="desarrollo"]').addEventListener('click', (e) => {
+            e.preventDefault();
+            this.showDesarrolloSection();
+            this.updateActiveLink(e.target);
+        });
+
+        // Selector de gráficos
+        document.getElementById('chartSelector').addEventListener('change', () => {
+            this.renderChart();
+        });
+    }
+
+    populateChartSelector() {
+        const selector = document.getElementById('chartSelector');
+        selector.innerHTML = '';
+
+        const metadata = this.dataManager.data.metadata;
+        
+        // Agregar opciones de Sala de Internación
+        Object.keys(metadata.chartTypes.internacion.charts).forEach(chartId => {
+            const option = document.createElement('option');
+            option.value = `internacion-${chartId}`;
+            option.textContent = `Internación: ${metadata.chartTypes.internacion.charts[chartId]}`;
+            selector.appendChild(option);
+        });
+
+        // Agregar opciones de Centro de Lactancia
+        Object.keys(metadata.chartTypes.lactancia.charts).forEach(chartId => {
+            const option = document.createElement('option');
+            option.value = `lactancia-${chartId}`;
+            option.textContent = `Lactancia: ${metadata.chartTypes.lactancia.charts[chartId]}`;
+            selector.appendChild(option);
+        });
+    }
+
+    renderChart() {
+        const selector = document.getElementById('chartSelector');
+        const [type, chartId] = selector.value.split('-');
+        
+        const chartData = this.dataManager.getChartData(type, chartId);
+        if (!chartData) return;
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+
+        // Destruir gráfico anterior si existe
+        if (this.chart) {
+            this.chart.destroy();
+        }
+
+        // Calcular porcentajes
+        const percentages = chartData.values.map(value => 
+            this.dataManager.calculatePercentage(value, chartData.population)
+        );
+
+        // Crear nuevo gráfico
+        this.chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: chartData.labels,
+                datasets: [{
+                    label: 'Porcentaje',
+                    data: percentages,
+                    backgroundColor: chartData.colors,
+                    borderColor: chartData.colors,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = chartData.values[context.dataIndex];
+                                const percentage = percentages[context.dataIndex];
+                                return `${context.label}: ${value} (${percentage}%)`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Actualizar título e información
+        document.getElementById('chartTitle').textContent = chartData.title;
+        document.getElementById('chartInfo').textContent = 
+            `Población total: ${chartData.population} pacientes`;
+    }
+
+    showDesarrolloSection() {
+        document.getElementById('mainContent').style.display = 'none';
+        document.getElementById('desarrolloContent').style.display = 'block';
+    }
+
+    updateActiveLink(activeLink) {
+        document.querySelectorAll('.list-group-item').forEach(link => {
+            link.classList.remove('active');
+        });
+        activeLink.classList.add('active', 'bg-light', 'text-primary');
+    }
+}
+
+// Inicializar la aplicación cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    new HospitalDashboard();
+});

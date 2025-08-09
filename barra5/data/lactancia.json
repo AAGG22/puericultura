@@ -1,0 +1,76 @@
+{
+    "2024": {
+        "chart1": {
+            "title": "Atenciones por Mes - Centro de Lactancia",
+            "population": 1200,
+            "labels": ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
+            "values": [150, 180, 200, 160, 190, 170],
+            "colors": ["#0d6efd"]
+        },
+        "chart2": {
+            "title": "Tipo de Atención",
+            "population": 1000,
+            "labels": ["Consulta", "Control", "Educación", "Apoyo"],
+            "values": [400, 300, 200, 100],
+            "colors": ["#6610f2", "#6f42c1", "#e83e8c", "#fd7e14"]
+        },
+        "chart3": {
+            "title": "Edad de las Madres",
+            "population": 800,
+            "labels": ["<20", "20-25", "26-30", "31-35", ">35"],
+            "values": [50, 200, 300, 180, 70],
+            "colors": ["#20c997", "#17a2b8", "#007bff", "#6c757d", "#e74c3c"]
+        },
+        "chart4": {
+            "title": "Modalidad de Atención",
+            "population": 1000,
+            "labels": ["Presencial", "Virtual", "Telefónica"],
+            "values": [600, 250, 150],
+            "colors": ["#28a745", "#ffc107", "#17a2b8"]
+        },
+        "chart5": {
+            "title": "Satisfacción del Servicio",
+            "population": 1000,
+            "labels": ["Excelente", "Bueno", "Regular", "Malo"],
+            "values": [700, 250, 40, 10],
+            "colors": ["#28a745", "#ffc107", "#fd7e14", "#dc3545"]
+        }
+    },
+    "2025": {
+        "chart1": {
+            "title": "Atenciones por Mes - Centro de Lactancia",
+            "population": 1500,
+            "labels": ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
+            "values": [200, 220, 250, 180, 210, 190],
+            "colors": ["#0d6efd"]
+        },
+        "chart2": {
+            "title": "Tipo de Atención",
+            "population": 1200,
+            "labels": ["Consulta", "Control", "Educación", "Apoyo"],
+            "values": [500, 350, 250, 100],
+            "colors": ["#6610f2", "#6f42c1", "#e83e8c", "#fd7e14"]
+        },
+        "chart3": {
+            "title": "Edad de las Madres",
+            "population": 1000,
+            "labels": ["<20", "20-25", "26-30", "31-35", ">35"],
+            "values": [60, 250, 380, 220, 90],
+            "colors": ["#20c997", "#17a2b8", "#007bff", "#6c757d", "#e74c3c"]
+        },
+        "chart4": {
+            "title": "Modalidad de Atención",
+            "population": 1200,
+            "labels": ["Presencial", "Virtual", "Telefónica"],
+            "values": [700, 350, 150],
+            "colors": ["#28a745", "#ffc107", "#17a2b8"]
+        },
+        "chart5": {
+            "title": "Satisfacción del Servicio",
+            "population": 1200,
+            "labels": ["Excelente", "Bueno", "Regular", "Malo"],
+            "values": [850, 300, 40, 10],
+            "colors": ["#28a745", "#ffc107", "#fd7e14", "#dc3545"]
+        }
+    }
+}

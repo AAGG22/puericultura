@@ -1,0 +1,21 @@
+{
+    "chartTypes": {
+        "internacion": {
+            "name": "Sala de Internación Conjunta",
+            "charts": {
+                "chart1": "Ocupación de Camas",
+                "chart2": "Tipo de Pacientes"
+            }
+        },
+        "lactancia": {
+            "name": "Centro de Lactancia Materna",
+            "charts": {
+                "chart1": "Atenciones por Mes",
+                "chart2": "Tipo de Atención",
+                "chart3": "Edad de las Madres",
+                "chart4": "Modalidad de Atención",
+                "chart5": "Satisfacción del Servicio"
+            }
+        }
+    }
+}

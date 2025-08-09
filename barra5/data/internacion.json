@@ -1,0 +1,34 @@
+{
+    "2024": {
+        "chart1": {
+            "title": "Ocupación de Camas - Sala de Internación Conjunta",
+            "population": 100,
+            "labels": ["Ocupadas", "Libres", "Mantenimiento"],
+            "values": [75, 20, 5],
+            "colors": ["#dc3545", "#198754", "#ffc107"]
+        },
+        "chart2": {
+            "title": "Tipo de Pacientes - Sala de Internación Conjunta",
+            "population": 200,
+            "labels": ["Quirúrgicos", "Médicos", "Pediatría", "Neonatos"],
+            "values": [80, 60, 40, 20],
+            "colors": ["#0d6efd", "#6f42c1", "#d63384", "#fd7e14"]
+        }
+    },
+    "2025": {
+        "chart1": {
+            "title": "Ocupación de Camas - Sala de Internación Conjunta",
+            "population": 110,
+            "labels": ["Ocupadas", "Libres", "Mantenimiento"],
+            "values": [85, 20, 5],
+            "colors": ["#dc3545", "#198754", "#ffc107"]
+        },
+        "chart2": {
+            "title": "Tipo de Pacientes - Sala de Internación Conjunta",
+            "population": 220,
+            "labels": ["Quirúrgicos", "Médicos", "Pediatría", "Neonatos"],
+            "values": [90, 70, 45, 15],
+            "colors": ["#0d6efd", "#6f42c1", "#d63384", "#fd7e14"]
+        }
+    }
+}
