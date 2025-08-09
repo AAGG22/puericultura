@@ -98,29 +98,21 @@
     <script src="js/app.js"></script>
 
     <!-- Controlador de navegación -->
+<!-- En tu index.html -->
 <script>
-    // Carga inicial forzada
-    function initApp() {
-        // Limpiar canvas
-        const canvas = document.getElementById('miGrafico');
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-        
-        // Cargar S.I.C. 2024 por defecto
-        loadJS('app.js');
-    }
-
     function loadJS(archivo) {
-        // Eliminar scripts anteriores
+        // 1. Eliminar scripts dinámicos anteriores
         document.querySelectorAll('script[data-dynamic]').forEach(s => s.remove());
         
-        // Cargar nuevo script
+        // 2. Limpiar el gráfico existente
+        const canvas = document.getElementById('miGrafico');
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // 3. Cargar nuevo script
         const script = document.createElement('script');
         script.src = `js/${archivo}`;
         script.setAttribute('data-dynamic', 'true');
-        script.onload = function() {
-            console.log(`${archivo} cargado correctamente`);
-        };
         document.body.appendChild(script);
     }
 
@@ -130,12 +122,9 @@
             e.preventDefault();
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
             e.target.classList.add('active');
-            loadJS(e.target.getAttribute('data-js'));
+            loadJS(e.target.getAttribute('data-js')); // Ej: "app2.js"
         });
     });
-
-    // Iniciar al cargar la página
-    window.addEventListener('DOMContentLoaded', initApp);
 </script>
 
 </body>
