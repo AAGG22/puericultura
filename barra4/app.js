@@ -76,7 +76,7 @@ function renderizarGrafico(idGrafico) {
                     font: { weight: 'bold' }
                 },
                 title: {
-                    display: true,
+                    display: false,
                     text: datos.titulo
                 }
             },
