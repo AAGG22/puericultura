@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráficos Dinámicos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <select id="selectorGraficos" class="form-select mb-4">
+                    <option value="grafico1">Gráfico 1</option>
+                    <option value="grafico2">Gráfico 2</option>
+                    <!-- Añadir más opciones aquí -->
+                </select>
+                <canvas id="miGrafico"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS y Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Plugin para mostrar labels en las barras -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
+    <script src="app.js"></script> <!-- Tu archivo JS -->
+</body>
+</html>
