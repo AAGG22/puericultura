@@ -96,4 +96,4 @@ document.getElementById('selectorGraficos').addEventListener('change', (e) => {
 });
 
 // Cargar primer gráfico por defecto
-renderizarGrafico('grafico1');
+renderizarGrafico('grafico5');
