@@ -1,6 +1,6 @@
 {
     "chartTypes": {
-        "S.I.C.": {
+        "internacion": {
             "name": "Sala de Internación Conjunta",
             "charts": {
                 "chart1": "Binomios Asistidos",
@@ -10,7 +10,7 @@
                 "chart5": "Tipo de Atención"
             }
         },
-        "C.L.M.": {
+        "lactancia": {
             "name": "Centro de Lactancia Materna",
             "charts": {
                 "chart1": "Binomios que requieren asistencia",
