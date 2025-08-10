@@ -76,7 +76,20 @@
             "population": 550,
             "labels": ["Beneficios", "Transición Láctea", "Frecuencia Alimentación", "Regla de Oro", "Tec. Prendida de pecho", "Banco Leche", "ALAS Humana", "Señales de hambre", "Lavado de Manos", "Prevención BOL", "Envío Info Wapp"],
             "values": [494, 494, 494, 494, 494, 212, 450, 494, 495, 495, 495, 495],
-            "colors": ["#0d6efd", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1"]
+             "colors": [
+    "#5ffb17cc", 
+    "#7ffe33cc", 
+    "#9eff4dcc", 
+    "#b8ff66cc", 
+    "#d1ff80cc", 
+    "#e5ff99cc", 
+    "#f5ffb3cc", 
+    "#ffff99cc", 
+    "#fffa80cc", 
+    "#fff566cc", 
+    "#ffef4dcc", 
+    "#ffe833cc"
+]
         },
         "chart5": {
             "title": "2025 - Sala de Internación Conjunta: Tipo de Atención",
