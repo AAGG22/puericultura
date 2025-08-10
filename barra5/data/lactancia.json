@@ -2,16 +2,16 @@
     "2024": {
         "chart1": {
             "title": "2024 - Centro de Lactancia Materna: Binomios que requieren asistencia",
-            "population": 1220,
+            "population": 538,
             "labels": ["Femenino", "Masculino", "EG 34-36", "EG 37", "EG 38-41"],
-            "values": [107, 105, 13, 23, 156],
+            "values": [276, 262, 50, 66, 393],
             "colors": ["#6610f2", "#6f42c1", "#e83e8c", "#fd7e14","#fd7e14"]
         },
         "chart2": {
             "title": "2024 - Centro de Lactancia Materna:Ocupacion de las Madres",
             "population": 1220,
             "labels": ["Trabaja", "Estudia", "Trabaja/Estudia", "Amas de Casa", "Ninguna"],
-            "values": [11, 11, 0, 0, 62],
+            "values": [0, 0, 0, 0, 0],
             "colors": ["#6610f2", "#6f42c1", "#e83e8c", "#fd7e14", "#fd7e14"]
         }
     },
