@@ -1,34 +1,76 @@
 {
     "2024": {
         "chart1": {
-            "title": "Ocupación de Camas - Sala de Internación Conjunta",
-            "population": 100,
-            "labels": ["xOcupadas24", "xLibres", "xMantenimiento"],
-            "values": [75, 20, 5],
-            "colors": ["#dc3545", "#198754", "#ffc107"]
+            "title": "2024 - Sala de Internación Conjunta: Binomios asistidos",
+            "population": 1220,
+            "labels": ["No requiere asistencia", "Si requiere asistencia"],
+            "values": [675, 538],
+            "colors": ["#dc3545", "#198754"]
         },
         "chart2": {
-            "title": "Tipo de Pacientes - Sala de Internación Conjunta",
-            "population": 200,
-            "labels": ["Quirúrgicos", "Médicos", "Pediatría", "Neonatos"],
-            "values": [80, 60, 40, 20],
-            "colors": ["#0d6efd", "#6f42c1", "#d63384", "#fd7e14"]
+            "title": "2024 - Sala de Internación Conjunta: Finalización de Embarazo",
+            "population": 1220,
+            "labels": ["Operación por cesárea", "Parto natural"],
+            "values": [637, 565],
+            "colors": ["#0d6efd", "#6f42c1"]
+        },
+        "chart3": {
+            "title": "2024 - Sala de Internación Conjunta: Sector de Consulta",
+            "population": 1220,
+            "labels": ["Neo", "RPM","SIC","UTIGO","C.Externa"],
+            "values": [14, 106, 1082, 18, 0],
+            "colors": ["#0d6efd", "#6f42c1"]
+        },
+        "chart4": {
+            "title": "2024 - Sala de Internación Conjunta: Educación en Puericultura",
+            "population": 1220,
+            "labels": ["Beneficios", "Transición Láctea", "Frecuencia Alimentación", "Regla de Oro", "Tec. Prendida de pecho", "Banco Leche", "ALAS Humana", "Señales de hambre", "Lavado de Manos", "Prevención BOL", "Envío Info Wapp"],
+            "values": [1220, 1220, 1220, 1220, 1220, 574, 1190, 1220, 495, 1220, 1220, 1217],
+            "colors": ["#0d6efd", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1"]
+        },
+        "chart5": {
+            "title": "2024 - Sala de Internación Conjunta: Tipo de Atención",
+            "population": 1220,
+            "labels": ["Pecho Exclusivo", "Lactancia Mixta", "Leche de Fórmula", "Lactancia Suspendida"],
+            "values": [1087, 115, 15, 0],
+            "colors": ["#0d6efd", "#6f42c1", "#6f42c1", "#6f42c1"]
         }
     },
     "2025": {
         "chart1": {
-            "title": "Sala de Internación Conjunta: Binomios asistidos",
+            "title": "2025 - Sala de Internación Conjunta: Binomios asistidos",
             "population": 550,
             "labels": ["No requiere asistencia", "Si requiere asistencia"],
             "values": [285, 212],
             "colors": ["#dc3545", "#198754"]
         },
         "chart2": {
-            "title": "Sala de Internación Conjunta: Finalización de Embarazo",
+            "title": "2025 - Sala de Internación Conjunta: Finalización de Embarazo",
             "population": 550,
             "labels": ["Operación por cesárea", "Parto natural"],
             "values": [251, 238],
             "colors": ["#0d6efd", "#6f42c1"]
+        },
+        "chart3": {
+            "title": "2025 - Sala de Internación Conjunta: Sector de Consulta",
+            "population": 550,
+            "labels": ["Neo", "RPM","SIC","UTIGO","C.Externa"],
+            "values": [6, 79, 416, 6, 0],
+            "colors": ["#0d6efd", "#6f42c1"]
+        },
+        "chart4": {
+            "title": "2025 - Sala de Internación Conjunta: Educación en Puericultura",
+            "population": 550,
+            "labels": ["Beneficios", "Transición Láctea", "Frecuencia Alimentación", "Regla de Oro", "Tec. Prendida de pecho", "Banco Leche", "ALAS Humana", "Señales de hambre", "Lavado de Manos", "Prevención BOL", "Envío Info Wapp"],
+            "values": [494, 494, 494, 494, 494, 212, 450, 494, 495, 495, 495, 495],
+            "colors": ["#0d6efd", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1", "#6f42c1"]
+        },
+        "chart5": {
+            "title": "2025 - Sala de Internación Conjunta: Tipo de Atención",
+            "population": 550,
+            "labels": ["Pecho Exclusivo", "Lactancia Mixta", "Leche de Fórmula", "Lactancia Suspendida"],
+            "values": [436, 60, 1, 0],
+            "colors": ["#0d6efd", "#6f42c1", "#6f42c1", "#6f42c1"]
         }
     }
 }

@@ -3,18 +3,18 @@
         "internacion": {
             "name": "Sala de Internación Conjunta",
             "charts": {
-                "chart1": "Ocupación de Camas",
-                "chart2": "Tipo de Pacientes"
+                "chart1": "Binomios Asistidos",
+                "chart2": "Finalización de Embarazo",
+                "chart3": "Sector de Consulta",
+                "chart4": "Educación en Puericultura",
+                "chart5": "Tipo de Atención"
             }
         },
         "lactancia": {
             "name": "Centro de Lactancia Materna",
             "charts": {
-                "chart1": "Atenciones por Mes",
-                "chart2": "Tipo de Atención",
-                "chart3": "Edad de las Madres",
-                "chart4": "Modalidad de Atención",
-                "chart5": "Satisfacción del Servicio"
+                "chart1": "Binomios que requieren asistencia",
+                "chart2": "Ocupacion de las Madres"
             }
         }
     }
