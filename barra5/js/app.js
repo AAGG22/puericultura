@@ -70,7 +70,7 @@ class HospitalDashboard {
         Object.keys(metadata.chartTypes.internacion.charts).forEach(chartId => {
             const option = document.createElement('option');
             option.value = `internacion-${chartId}`;
-            option.textContent = `Internación: ${metadata.chartTypes.internacion.charts[chartId]}`;
+            option.textContent = `S.I.C.: ${metadata.chartTypes.internacion.charts[chartId]}`;
             selector.appendChild(option);
         });
 
@@ -78,7 +78,7 @@ class HospitalDashboard {
         Object.keys(metadata.chartTypes.lactancia.charts).forEach(chartId => {
             const option = document.createElement('option');
             option.value = `lactancia-${chartId}`;
-            option.textContent = `Lactancia: ${metadata.chartTypes.lactancia.charts[chartId]}`;
+            option.textContent = `C.L.M: ${metadata.chartTypes.lactancia.charts[chartId]}`;
             selector.appendChild(option);
         });
     }
