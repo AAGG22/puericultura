@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo Puericultura · Bootstrap</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=productivity" />
+
+    <!-- Bootstrap 5.3 con íconos (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons (opcional, para detalles) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=account_child" />
+
+    <style>
+        /* pequeños ajustes personalizados para mantener la estética conversada */
+        body {
+            background: #eef2f5;
+            /* Fondo gris suave y profesional */
+            padding: 2rem 1rem;
+        }
+
+        .card-custom {
+            border-radius: 28px !important;
+            border: 1px solid #d4e4f0 !important;
+            box-shadow: 0 12px 24px -10px rgba(30, 70, 90, 0.15);
+            background-color: #ffffff;
+            /* Cards blancas para mejor contraste */
+            transition: all 0.2s;
+        }
+
+        .card-custom .card-header {
+            background: transparent;
+            border-bottom: 2px solid #cde0ec;
+            padding: 1.2rem 1.8rem 0.8rem 1.8rem;
+            font-weight: 600;
+            font-size: 1.6rem;
+            color: #0f475c;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            /* Permite que el contenido se envuelva en móvil */
+        }
+
+        .card-custom .card-body {
+            padding: 1.5rem 1.8rem 1.8rem 1.8rem;
+        }
+
+        .form-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: #2d6177;
+            margin-bottom: 0.2rem;
+        }
+
+        .form-control,
+        .form-select {
+            background-color: #f2f9ff;
+            border: 1px solid #c2dae9;
+            border-radius: 40px !important;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.95rem;
+            transition: 0.2s;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            background-color: #ffffff;
+            border-color: #1f8cad;
+            box-shadow: 0 0 0 0.25rem rgba(31, 140, 173, 0.15);
+            outline: none;
+        }
+
+        /* grupo sexo como chips */
+        .sexo-group {
+            background: #f2f9ff;
+            border: 1px solid #c2dae9;
+            border-radius: 40px;
+            padding: 0.3rem 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.2rem;
+            flex-wrap: wrap;
+            /* Para móvil */
+        }
+
+        .sexo-group .form-check-inline {
+            margin-right: 0;
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            background: transparent;
+        }
+
+        .sexo-group .form-check-input {
+            margin-right: 0.2rem;
+        }
+
+        .sexo-group .form-check-label {
+            font-weight: 500;
+            color: #124f64;
+        }
+
+        /* tarjetas de anatomía */
+        .anatomia-subcard {
+            background: #f8fafc;
+            /* Gris mucho más claro para mejor contraste */
+            border-radius: 24px;
+            padding: 1.2rem 1.2rem;
+            border: 1px solid #d3e4f0;
+            height: 100%;
+        }
+
+        .anatomia-subcard h4 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #185f74;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .opcion-radio-chip {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            border: 1px solid #c9deec;
+            border-radius: 40px;
+            padding: 0.35rem 1rem 0.35rem 0.8rem;
+            transition: 0.1s;
+            height: 100%;
+            /* Para que todos tengan la misma altura */
+        }
+
+        .opcion-radio-chip .form-check-input {
+            margin-top: 0;
+            flex-shrink: 0;
+            /* Evita que el checkbox se encoja */
+        }
+
+        .opcion-radio-chip .form-check-label {
+            font-size: 0.9rem;
+            line-height: 1.2;
+            word-break: break-word;
+            /* Permite que el texto corte si es muy largo */
+        }
+
+        /* checks de beneficios */
+        .beneficio-check {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: white;
+            border: 1px solid #cde0ec;
+            border-radius: 40px;
+            padding: 0.4rem 1.2rem 0.4rem 1rem;
+            height: 100%;
+        }
+
+        .beneficio-check .form-check-input {
+            width: 1.1em;
+            height: 1.1em;
+            margin-top: 0;
+            flex-shrink: 0;
+        }
+
+        .beneficio-check .form-check-label {
+            font-size: 0.9rem;
+            line-height: 1.2;
+            word-break: break-word;
+        }
+
+        .badge-soft {
+            background: #cbe2ee;
+            color: #0a475b;
+            font-weight: 600;
+            font-size: 0.7rem;
+            letter-spacing: 0.3px;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+        }
+
+        .grid-beneficios {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.8rem;
+        }
+
+        /* Mejoras responsive */
+        @media (max-width: 768px) {
+            .card-custom .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .card-custom .card-header .d-flex.align-items-center.gap-3 {
+                width: 100%;
+                flex-wrap: wrap;
+            }
+
+            .form-check.d-flex.align-items-center.gap-2 {
+                width: 100%;
+            }
+
+            /* Para los campos de fecha, historia, sector */
+            .col-md-auto {
+                width: 100%;
+            }
+
+            .col-md-auto input,
+            .col-md-auto select {
+                width: 100% !important;
+            }
+
+            /* Ajuste para las opciones de anatomía */
+            .anatomia-subcard .row.g-2>div {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+
+            /* En móvil muy pequeño, 1 columna */
+            @media (max-width: 480px) {
+                .anatomia-subcard .row.g-2>div {
+                    flex: 0 0 100%;
+                    max-width: 100%;
+                }
+
+                .grid-beneficios {
+                    grid-template-columns: 1fr;
+                }
+            }
+        }
+
+        @media (max-width: 576px) {
+            .grid-beneficios {
+                grid-template-columns: 1fr;
+            }
+
+            .anatomia-subcard .row {
+                --bs-gutter-y: 0.5rem;
+            }
+
+            .card-custom .card-header {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* espaciado vertical */
+        .section-gap {
+            margin-bottom: 1.8rem;
+        }
+
+        .bg-soft {
+            background-color: #f5fafd;
+        }
+
+        /* Para los íconos en títulos */
+        .card-header img {
+            max-width: 3rem;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .card-header img {
+                max-width: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-lg px-0" style="max-width: 1400px;">
+
+        <!-- PRIMER CARD: N° Historia Clínica + Fecha automática + Sector -->
+        <div class="card card-custom section-gap">
+            <div class="card-body">
+                <div class="row g-4 align-items-center">
+                    <!-- Número de Historia Clínica -->
+                    <div class="col-md-auto">
+                        <label class="form-label d-block mb-1">Número de Historia Clínica</label>
+                        <input type="text" class="form-control" name="historia_clinica" value="HC-2024-00123" readonly
+                            style="background-color: #f0f7fc; width: 250px;">
+                    </div>
+
+                    <!-- Fecha automática (día actual) -->
+                    <div class="col-md-auto">
+                        <label class="form-label d-block mb-1">Fecha</label>
+                        <input type="date" class="form-control" name="fecha_actual" value="<?php echo date('Y-m-d'); ?>"
+                            readonly style="background-color: #f0f7fc; width: 180px;">
+
+                    </div>
+                    <!-- -->
+
+
+                    <!-- Select de Sector -->
+                    <div class="col-md-auto">
+                        <label class="form-label d-block mb-1">Sector</label>
+                        <select class="form-select" name="sector" style="width: 200px;">
+                            <option value="" selected disabled>Seleccionar</option>
+                            <option value="SIC">SIC</option>
+                            <option value="RPM">RPM</option>
+                            <option value="NEO">NEO</option>
+                            <option value="UTIGO">UTIGO</option>
+                            <option value="CE">CE</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAMÁ (con selects para ocupación, provincia, localidad, ciudad) -->
+        <div class="card card-custom section-gap">
+            <div class="card-header">
+                <i class="bi bi-person-standing-dress fs-1 me-2" style="color:#1f7f9c;"></i> Mamá
+            </div>
+            <div class="card-body">
+                <div class="anatomia-subcard">
+                    <div class="row g-4">
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="mamaNombre" placeholder="Nombre"
+                                    name="mama_nombre">
+                                <label for="mamaNombre">Nombre</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="mamaApellido" placeholder="Apellido"
+                                    name="mama_apellido">
+                                <label for="mamaApellido">Apellido</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="mamaDni" placeholder="DNI" name="mama_dni">
+                                <label for="mamaDni">DNI</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="mamaHijos" placeholder="Nº hijos"
+                                    name="mama_hijos">
+                                <label for="mamaHijos">Nº hijos</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="mamaEdadMat" placeholder="Edad Mat."
+                                    name="mama_edad_mat">
+                                <label for="mamaEdadMat">Edad Mat.</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="form-floating">
+                                <input type="tel" class="form-control" id="mamaCelular" placeholder="Celular"
+                                    name="mama_celular">
+                                <label for="mamaCelular">Celular</label>
+                            </div>
+                        </div>
+                        <!-- Ocupación (select) -->
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="form-floating">
+                                <select class="form-select" id="mamaOcupacion" name="mama_ocupacion">
+                                    <option value="" selected>Seleccionar</option>
+                                    <option value="empleada">Empleada</option>
+                                    <option value="independiente">Independiente</option>
+                                    <option value="ama_de_casa">Ama de casa</option>
+                                    <option value="estudiante">Estudiante</option>
+                                    <option value="docente">Docente</option>
+                                    <option value="profesional">Profesional</option>
+                                </select>
+                                <label for="mamaOcupacion">Ocupación</label>
+                            </div>
+                        </div>
+                        <!-- Provincia (select) -->
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="form-floating">
+                                <select class="form-select" id="mamaProvincia" name="mama_provincia">
+                                    <option value="" selected>Seleccionar</option>
+                                    <option value="Buenos Aires">Buenos Aires</option>
+                                    <option value="CABA">CABA</option>
+                                    <option value="Córdoba">Córdoba</option>
+                                    <option value="Santa Fe">Santa Fe</option>
+                                    <option value="Mendoza">Mendoza</option>
+                                </select>
+                                <label for="mamaProvincia">Provincia</label>
+                            </div>
+                        </div>
+                        <!-- Localidad (select) -->
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="form-floating">
+                                <select class="form-select" id="mamaLocalidad" name="mama_localidad">
+                                    <option value="" selected>Seleccionar</option>
+                                    <option value="Centro">Centro</option>
+                                    <option value="Norte">Norte</option>
+                                    <option value="Sur">Sur</option>
+                                </select>
+                                <label for="mamaLocalidad">Localidad</label>
+                            </div>
+                        </div>
+                        <!-- Ciudad (select) -->
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="form-floating">
+                                <select class="form-select" id="mamaCiudad" name="mama_ciudad">
+                                    <option value="" selected>Seleccionar</option>
+                                    <option value="Capital">Capital</option>
+                                    <option value="Rosario">Rosario</option>
+                                    <option value="Mendoza">Mendoza</option>
+                                </select>
+                                <label for="mamaCiudad">Ciudad</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BEBÉ (con sexo horizontal F-M y Nac. tipo como select) -->
+        <div class="card card-custom section-gap">
+            <div class="card-header">
+                <i class="fa-solid fa-baby icono-bebe fs-1 me-2" style="color:#1f7f9c;"></i>
+
+                Bebé
+            </div>
+            <div class="card-body">
+                <div class="anatomia-subcard">
+                    <div class="row gy-4 align-items-end">
+                        <!-- SEXO: F  M en línea horizontal -->
+                        <div class="col-md-auto">
+                            <span class="form-label d-block mb-1">SEXO</span>
+                            <div class="sexo-group d-flex gap-3"
+                                style="background: #f2f9ff; border: 1px solid #c2dae9; border-radius: 40px; padding: 0.3rem 1.2rem;">
+                                <div class="form-check form-check-inline mb-0">
+                                    <input class="form-check-input" type="radio" name="bebe_sexo" id="sexoF" value="F">
+                                    <label class="form-check-label" for="sexoF">F</label>
+                                </div>
+
+                                <div class="form-check form-check-inline mb-0">
+                                    <input class="form-check-input" type="radio" name="bebe_sexo" id="sexoM" value="M">
+                                    <label class="form-check-label" for="sexoM">M</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NAC. TIPO (SELECT) + FECHA + HORA + EDAD GEST -->
+                        <div class="col-md">
+                            <div class="row g-3">
+                                <!-- Nac. tipo como SELECT -->
+                                <div class="col-sm-3">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="bebeTipo" name="bebe_nac_tipo">
+                                            <option value="" selected>Seleccionar</option>
+                                            <option value="Parto natural">Parto natural</option>
+                                            <option value="Cesaría">Cesaría</option>
+                                        </select>
+                                        <label for="bebeTipo">Nac. tipo</label>
+                                    </div>
+                                </div>
+                                <!-- Nac. fecha -->
+                                <div class="col-sm-3">
+                                    <div class="form-floating">
+                                        <input type="date" class="form-control" id="bebeFecha" placeholder="dd/mm/aaaa"
+                                            name="bebe_nac_fecha">
+                                        <label for="bebeFecha">Nac. fecha</label>
+                                    </div>
+                                </div>
+                                <!-- Nac. hora -->
+                                <div class="col-sm-3">
+                                    <div class="form-floating">
+                                        <input type="time" class="form-control" id="bebeHora" placeholder="---:---:---"
+                                            name="bebe_nac_hora">
+                                        <label for="bebeHora">Nac. hora</label>
+                                    </div>
+                                </div>
+                                <!-- Edad Gest. -->
+                                <div class="col-sm-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="bebeEdadGest"
+                                            placeholder="Edad Gest." name="bebe_edad_gest">
+                                        <label for="bebeEdadGest">Edad Gest.</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ANATOMÍA  -->
+        <div class="card card-custom section-gap">
+            <div class="card-header">
+                <i class="fa-regular fa-circle-check fs-1 me-2" style="color:#1f7f9c;"></i>
+                Anatomía
+            </div>
+            <div class="card-body">
+                <div class="row g-4">
+                    <!-- Calostro -->
+                    <div class="col-md-6">
+                        <div class="anatomia-subcard">
+                            <h4>Calostro</h4>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="calostro" id="calAccorde" value="Accorde"><label
+                                            class="form-check-label" for="calAccorde">Accorde</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="calostro" id="calEscaso" value="Escaso"><label
+                                            class="form-check-label" for="calEscaso">Escaso</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="calostro" id="calNulo" value="Nulo"><label class="form-check-label"
+                                            for="calNulo">Nulo</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="calostro" id="calAbundantemente" value="Abundantemente"><label
+                                            class="form-check-label" for="calAbundantemente">Abundantemente</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="calostro" id="calCompensatorio" value="Compensatorio"><label
+                                            class="form-check-label" for="calCompensatorio">Compensatorio</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="calostro" id="calMaestria" value="Maestría"><label
+                                            class="form-check-label" for="calMaestria">Maestría</label></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Pezones (AHORA CON 3 OPCIONES: Protráctil, Planos, Umbilicados) -->
+                    <div class="col-md-6">
+                        <div class="anatomia-subcard">
+                            <h4>
+                                Pezones
+                            </h4>
+                            <div class="row g-2">
+                                <div class="col-4">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="pezones" id="pezProtractil" value="Protráctil"><label
+                                            class="form-check-label" for="pezProtractil">Protráctil</label></div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="pezones" id="pezPlanos" value="Planos"><label class="form-check-label"
+                                            for="pezPlanos">Planos</label></div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="pezones" id="pezUmbilicados" value="Umbilicados"><label
+                                            class="form-check-label" for="pezUmbilicados">Umbilicados</label></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Piel (NUEVA: Sana, Roja, Fisura, Grieta) -->
+                    <div class="col-md-6">
+                        <div class="anatomia-subcard">
+                            <h4>
+                                Piel
+                            </h4>
+                            <div class="row g-2">
+                                <div class="col-3">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="piel" id="pielSana" value="Sana"><label class="form-check-label"
+                                            for="pielSana">Sana</label></div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="piel" id="pielRoja" value="Roja"><label class="form-check-label"
+                                            for="pielRoja">Roja</label></div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="piel" id="pielFisura" value="Fisura"><label class="form-check-label"
+                                            for="pielFisura">Fisura</label></div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="piel" id="pielGrieta" value="Grieta"><label class="form-check-label"
+                                            for="pielGrieta">Grieta</label></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pechos (NUEVA: Llenos, Estirados) -->
+                    <div class="col-md-6">
+                        <div class="anatomia-subcard">
+                            <h4>
+                                Pechos
+                            </h4>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="pechos" id="pechosLlenos" value="Llenos"><label
+                                            class="form-check-label" for="pechosLlenos">Llenos</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="pechos" id="pechosEstirados" value="Estirados"><label
+                                            class="form-check-label" for="pechosEstirados">Estirados</label></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- RESPUESTA (Succión + Estado) -->
+        <div class="card card-custom section-gap">
+            <div class="card-header">
+                <i class="bi bi-activity fs-1 me-2" style="color:#1f7f9c;"></i> RESPUESTA
+            </div>
+            <div class="card-body">
+                <div class="row g-4">
+                    <!-- Succión (7 opciones) -->
+                    <div class="col-md-6">
+                        <div class="anatomia-subcard">
+                            <h4>Succión
+                            </h4>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="succion" id="succEficaz" value="Eficaz"><label
+                                            class="form-check-label" for="succEficaz">Eficaz</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="succion" id="succIneficaz" value="Ineficaz"><label
+                                            class="form-check-label" for="succIneficaz">Ineficaz</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="succion" id="succAsistencia" value="Succion con asistencia"><label
+                                            class="form-check-label" for="succAsistencia">Succion con asistencia</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="succion" id="succRegular" value="Regular"><label
+                                            class="form-check-label" for="succRegular">Regular</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="succion" id="succIrregular" value="Irregular"><label
+                                            class="form-check-label" for="succIrregular">Irregular</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="succion" id="succSeDuerme" value="Se duerme"><label
+                                            class="form-check-label" for="succSeDuerme">Se duerme</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="succion" id="succNoSucciona" value="No succiona"><label
+                                            class="form-check-label" for="succNoSucciona">No succiona</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="succion" id="succSeSuelta" value="Se suelta en la toma"><label
+                                            class="form-check-label" for="succSeSuelta">Se suelta en la toma</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="succion" id="succConEstimulo"
+                                            value="Solo succiona con estimulo"><label class="form-check-label"
+                                            for="succConEstimulo">Solo succiona con estimulo</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="succion" id="succBuena" value="Buena succion"><label
+                                            class="form-check-label" for="succBuena">Buena succion</label></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Estado (4 opciones) -->
+                    <div class="col-md-6">
+                        <div class="anatomia-subcard">
+                            <h4> Estado
+                            </h4>
+                            <div class="row g-2">
+                                <div class="col-3">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="estado" id="estadoTranquilo" value="Tranquilo"><label
+                                            class="form-check-label" for="estadoTranquilo">Tranquilo</label></div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="estado" id="estadoLlora" value="Llora"><label class="form-check-label"
+                                            for="estadoLlora">Llora</label></div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="estado" id="estadoIrritable" value="Irritable"><label
+                                            class="form-check-label" for="estadoIrritable">Irritable</label></div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="estado" id="estadoColico" value="Cólico"><label
+                                            class="form-check-label" for="estadoColico">Cólico</label></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VÍNCULO AFECTIVO (Lo sostiene + Contacto) -->
+        <div class="card card-custom section-gap">
+            <div class="card-header">
+                <i class="bi bi-heart fs-1 me-2" style="color:#1f7f9c;"></i> VÍNCULO AFECTIVO
+            </div>
+            <div class="card-body">
+                <div class="row g-4">
+                    <!-- Lo sostiene (3 opciones) -->
+                    <div class="col-md-6">
+                        <div class="anatomia-subcard">
+                            <h4>Lo sostiene
+                            </h4>
+                            <div class="row g-2">
+                                <div class="col-4">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="sostiene" id="sostieneSegura" value="Segura"><label
+                                            class="form-check-label" for="sostieneSegura">Segura</label></div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="sostiene" id="sostieneNerviosa" value="Nerviosa"><label
+                                            class="form-check-label" for="sostieneNerviosa">Nerviosa</label></div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="sostiene" id="sostieneTorpeza" value="Torpeza"><label
+                                            class="form-check-label" for="sostieneTorpeza">Torpeza</label></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contacto (4 opciones) -->
+                    <div class="col-md-6">
+                        <div class="anatomia-subcard">
+                            <h4>Contacto
+                            </h4>
+                            <div class="row g-2">
+                                <div class="col-3">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="contacto" id="contactoMira" value="Mira a su bebe"><label
+                                            class="form-check-label" for="contactoMira">Mira a su bebe</label></div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="contacto" id="contactoNoMira" value="No lo mira"><label
+                                            class="form-check-label" for="contactoNoMira">No lo mira</label></div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="contacto" id="contactoAcaricia" value="Lo acaricia"><label
+                                            class="form-check-label" for="contactoAcaricia">Lo acaricia</label></div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="radio"
+                                            name="contacto" id="contactoNoToca" value="No lo toca"><label
+                                            class="form-check-label" for="contactoNoToca">No lo toca</label></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EDUCACIÓN EN PUERICULTURA (beneficios) -->
+        <div class="card card-custom section-gap">
+            <div
+                class="card-header d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+                <!-- Lado izquierdo: icono + título -->
+                <div class="d-flex align-items-center mb-2 mb-md-0">
+                    <img src="/Lactancia_Materna/assets/png/puericultura3.png" alt="Lactancia" class="me-2"
+                        style="width: 4rem; height: auto;">
+                    <span>
+                        Educación en Puericultura
+                    </span>
+                </div>
+
+                <!-- Lado derecho: checkbox + whatsapp -->
+                <div class="d-flex align-items-center gap-3 flex-wrap">
+                    <div class="form-check d-flex align-items-center gap-2 mb-0">
+                        <input class="form-check-input" type="checkbox" name="envio_instructivos" id="envioInstructivos"
+                            value="si">
+                        <label class="form-check-label fw-normal text-primary" for="envioInstructivos"
+                            style="white-space: normal;">
+                            Envío de Instructivos
+                        </label>
+                    </div>
+                    <a href="https://wa.me/" target="_blank" class="text-decoration-none">
+                        <i class="bi bi-whatsapp fs-3 text-success"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- resto del contenido igual -->
+
+
+
+        <!-- INTERVENCIÓN -->
+        <div class="card card-custom section-gap">
+            <div class="card-header">
+                <i class="fa-solid fa-user-doctor fs-1 me-2" style="color:#1f7f9c;"></i>
+
+                INTERVENCIÓN
+            </div>
+            <div class="card-body">
+
+                <!-- Requiere Asistencia (SI/NO) -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <span class="form-label d-block mb-2">Requiere Asistencia</span>
+                        <div class="sexo-group d-flex gap-3"
+                            style="background: #f2f9ff; border: 1px solid #c2dae9; border-radius: 40px; padding: 0.3rem 1.2rem; width: fit-content;">
+                            <div class="form-check form-check-inline mb-0">
+                                <input class="form-check-input" type="radio" name="requiere_asistencia"
+                                    id="asistenciaSi" value="si">
+                                <label class="form-check-label" for="asistenciaSi">Sí</label>
+                            </div>
+                            <div class="form-check form-check-inline mb-0">
+                                <input class="form-check-input" type="radio" name="requiere_asistencia"
+                                    id="asistenciaNo" value="no">
+                                <label class="form-check-label" for="asistenciaNo">No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Se corrige (opción múltiple) -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="anatomia-subcard">
+                            <h4>Se corrige
+                            </h4>
+                            <div class="row g-2">
+                                <div class="col-md-4 col-6">
+                                    <div class="opcion-radio-chip">
+                                        <input class="form-check-input" type="checkbox" name="se_corrige[]"
+                                            id="corrigePosicionMama" value="Posición de cuerpo mama">
+                                        <label class="form-check-label" for="corrigePosicionMama">Posición de cuerpo
+                                            mama</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-6">
+                                    <div class="opcion-radio-chip">
+                                        <input class="form-check-input" type="checkbox" name="se_corrige[]"
+                                            id="corrigePanza" value="Posición bb panza con panza">
+                                        <label class="form-check-label" for="corrigePanza">Posición bb panza con
+                                            panza</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-6">
+                                    <div class="opcion-radio-chip">
+                                        <input class="form-check-input" type="checkbox" name="se_corrige[]"
+                                            id="corrigeCuello" value="Cuello torcido">
+                                        <label class="form-check-label" for="corrigeCuello">Cuello torcido</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-6">
+                                    <div class="opcion-radio-chip">
+                                        <input class="form-check-input" type="checkbox" name="se_corrige[]"
+                                            id="corrigeAcopleAmbos" value="Acople ambos labios">
+                                        <label class="form-check-label" for="corrigeAcopleAmbos">Acople ambos
+                                            labios</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-6">
+                                    <div class="opcion-radio-chip">
+                                        <input class="form-check-input" type="checkbox" name="se_corrige[]"
+                                            id="corrigeAcopleInferior" value="Acople labio inferior">
+                                        <label class="form-check-label" for="corrigeAcopleInferior">Acople labio
+                                            inferior</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-6">
+                                    <div class="opcion-radio-chip">
+                                        <input class="form-check-input" type="checkbox" name="se_corrige[]"
+                                            id="corrigeBocaFruncida" value="Boca fruncida">
+                                        <label class="form-check-label" for="corrigeBocaFruncida">Boca
+                                            fruncida</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-6">
+                                    <div class="opcion-radio-chip">
+                                        <input class="form-check-input" type="checkbox" name="se_corrige[]"
+                                            id="corrigeChasquido" value="Chasquido al succionar">
+                                        <label class="form-check-label" for="corrigeChasquido">Chasquido al
+                                            succionar</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-6">
+                                    <div class="opcion-radio-chip">
+                                        <input class="form-check-input" type="checkbox" name="se_corrige[]"
+                                            id="corrigeMejillasUndidas" value="Mejillas undidas">
+                                        <label class="form-check-label" for="corrigeMejillasUndidas">Mejillas
+                                            undidas</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-6">
+                                    <div class="opcion-radio-chip">
+                                        <input class="form-check-input" type="checkbox" name="se_corrige[]"
+                                            id="corrigeMejillasTensas" value="Mejillas tensas">
+                                        <label class="form-check-label" for="corrigeMejillasTensas">Mejillas
+                                            tensas</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-6">
+                                    <div class="opcion-radio-chip">
+                                        <input class="form-check-input" type="checkbox" name="se_corrige[]"
+                                            id="corrigeNoRequiere" value="No lo requiere">
+                                        <label class="form-check-label" for="corrigeNoRequiere">No lo
+                                            requiere</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tipo Alimentación (opción múltiple) -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="anatomia-subcard">
+                            <h4>Tipo Alimentación
+                            </h4>
+                            <div class="row g-2">
+                                <div class="col-4">
+                                    <div class="opcion-radio-chip">
+                                        <input class="form-check-input" type="checkbox" name="tipo_alimentacion[]"
+                                            id="alimPE" value="PE">
+                                        <label class="form-check-label" for="alimPE">PE</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="opcion-radio-chip">
+                                        <input class="form-check-input" type="checkbox" name="tipo_alimentacion[]"
+                                            id="alimLMIXT" value="LMIXT">
+                                        <label class="form-check-label" for="alimLMIXT">LMIXT</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="opcion-radio-chip">
+                                        <input class="form-check-input" type="checkbox" name="tipo_alimentacion[]"
+                                            id="alimFormula" value="Formula">
+                                        <label class="form-check-label" for="alimFormula">Formula</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Causas (opción múltiple) -->
+                    <div class="col-md-6">
+                        <div class="anatomia-subcard">
+                            <h4>Causas
+                            </h4>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="checkbox"
+                                            name="causas[]" id="causaUtiGo" value="Mama en UtiGo"><label
+                                            class="form-check-label" for="causaUtiGo">Mama en UtiGo</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="checkbox"
+                                            name="causas[]" id="causaDeseo" value="Deseo materno"><label
+                                            class="form-check-label" for="causaDeseo">Deseo materno</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="checkbox"
+                                            name="causas[]" id="causaSustancias" value="Consumo de sustancias"><label
+                                            class="form-check-label" for="causaSustancias">Consumo de sustancias</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="checkbox"
+                                            name="causas[]" id="causaEnfermedad" value="Efermedad incomparible"><label
+                                            class="form-check-label" for="causaEnfermedad">Efermedad
+                                            incomparible</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="checkbox"
+                                            name="causas[]" id="causaTratamiento"
+                                            value="Tratamiento medico materno incompatible"><label
+                                            class="form-check-label" for="causaTratamiento">Tratamiento medico
+                                            materno
+                                            incompatible</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="checkbox"
+                                            name="causas[]" id="causaRecuperacion"
+                                            value="Recuperación nutricional"><label class="form-check-label"
+                                            for="causaRecuperacion">Recuperación nutricional</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="checkbox"
+                                            name="causas[]" id="causaNoRequiere" value="No lo requiere"><label
+                                            class="form-check-label" for="causaNoRequiere">No lo requiere</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="checkbox"
+                                            name="causas[]" id="causaNoSucciona" value="NO SUCCIONA"><label
+                                            class="form-check-label" for="causaNoSucciona">NO SUCCIONA</label></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Indicación LF (SI/NO) y Suspende Lactancia (SI/NO) -->
+                <div class="row mb-4">
+
+
+                    <div class="col-md-3">
+                        <span class="form-label d-block mb-2">Indicación LF</span>
+                        <div class="sexo-group d-flex gap-3"
+                            style="background: #f2f9ff; border: 1px solid #c2dae9; border-radius: 40px; padding: 0.3rem 1.2rem; width: fit-content;">
+                            <div class="form-check form-check-inline mb-0">
+                                <input class="form-check-input" type="radio" name="indicacion_lf" id="lfSi" value="si">
+                                <label class="form-check-label" for="lfSi">Sí</label>
+                            </div>
+                            <div class="form-check form-check-inline mb-0">
+                                <input class="form-check-input" type="radio" name="indicacion_lf" id="lfNo" value="no">
+                                <label class="form-check-label" for="lfNo">No</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <span class="form-label d-block mb-2">Suspende Lactancia Materna</span>
+                        <div class="sexo-group d-flex gap-3"
+                            style="background: #f2f9ff; border: 1px solid #c2dae9; border-radius: 40px; padding: 0.3rem 1.2rem; width: fit-content;">
+                            <div class="form-check form-check-inline mb-0">
+                                <input class="form-check-input" type="radio" name="suspende_lactancia" id="suspendeSi"
+                                    value="si">
+                                <label class="form-check-label" for="suspendeSi">Sí</label>
+                            </div>
+                            <div class="form-check form-check-inline mb-0">
+                                <input class="form-check-input" type="radio" name="suspende_lactancia" id="suspendeNo"
+                                    value="no">
+                                <label class="form-check-label" for="suspendeNo">No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Motivo (opción múltiple) -->
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="anatomia-subcard">
+                            <h4> Motivo
+                            </h4>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="checkbox"
+                                            name="motivo[]" id="motivoDeseo" value="Deseo Materno"><label
+                                            class="form-check-label" for="motivoDeseo">Deseo Materno</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="checkbox"
+                                            name="motivo[]" id="motivoSustancias"
+                                            value="Consumo sustnacias ilicitas"><label class="form-check-label"
+                                            for="motivoSustancias">Consumo sustnacias ilicitas</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="checkbox"
+                                            name="motivo[]" id="motivoEnfermedad"
+                                            value="Enfermedad incompatible con lactancia"><label
+                                            class="form-check-label" for="motivoEnfermedad">Enfermedad incompatible
+                                            con
+                                            lactancia</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="checkbox"
+                                            name="motivo[]" id="motivoTratamiento"
+                                            value="Tratamiento medico materno incompatible"><label
+                                            class="form-check-label" for="motivoTratamiento">Tratamiento medico
+                                            materno
+                                            incompatible</label></div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="opcion-radio-chip"><input class="form-check-input" type="checkbox"
+                                            name="motivo[]" id="motivoNoRequiere" value="No lo requiere"><label
+                                            class="form-check-label" for="motivoNoRequiere">No lo requiere</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DESTETE -->
+        <div class="card card-custom section-gap">
+            <div class="card-header">
+
+                <img src="/Lactancia_Materna/assets/png/biberon.png" alt="Destete"
+                    style="width: 4rem; height: auto; margin-right: 0.5rem;">
+                DESTETE
+            </div>
+            <div class="card-body">
+                <div class="anatomia-subcard">
+                    <div class="row align-items-end g-4">
+                        <!-- Lactancia previas (SI/NO) -->
+                        <div class="col-md-auto">
+                            <span class="form-label d-block mb-2">Lactancia previas</span>
+                            <div class="sexo-group d-flex gap-3"
+                                style="background: #f2f9ff; border: 1px solid #c2dae9; border-radius: 40px; padding: 0.3rem 1.2rem; width: fit-content;">
+                                <div class="form-check form-check-inline mb-0">
+                                    <input class="form-check-input" type="radio" name="lactancia_previas" id="previasSi"
+                                        value="si">
+                                    <label class="form-check-label" for="previasSi">Sí</label>
+                                </div>
+                                <div class="form-check form-check-inline mb-0">
+                                    <input class="form-check-input" type="radio" name="lactancia_previas" id="previasNo"
+                                        value="no">
+                                    <label class="form-check-label" for="previasNo">No</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fecha (igual que Nac. fecha) -->
+                        <div class="col-md-auto">
+                            <div class="form-floating" style="min-width: 200px;">
+                                <input type="date" class="form-control" id="desteteFecha" placeholder="dd/mm/aaaa"
+                                    name="destete_fecha">
+                                <label for="desteteFecha">Fecha de destete</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <!-- espacio para futuros campos, todo listo para PHP -->
+    </div>
+    <!-- Opcional: script de Bootstrap para componentes interactivos (no necesario para este layout estático) -->
+</body>
+
+</html>
